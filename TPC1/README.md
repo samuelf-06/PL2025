@@ -1,4 +1,4 @@
-# TPC3 - Calculadora de Soma
+# TPC1 - Calculadora de Soma
 
 Este é um simples script em Python que atua como uma calculadora de soma, processando um texto para encontrar sequências de números e realizar operações de soma com base em comandos 'on' e 'off'.
 
