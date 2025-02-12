@@ -5,8 +5,8 @@ Este é um simples script em Python que atua como uma calculadora de soma, proce
 ## Funcionamento do Código
 
 - **Inicialização das Variáveis**: 
-  - A variável 'soma_ativa' é inicializada como False para indicar que a soma não está ativa inicialmente.
-  - 'soma_atual' é inicializada com um valor de 8 para representar a soma inicial.
+  - A variável 'somador' é inicializada como True para indicar que a soma está ativa inicialmente.
+  - 'total' é inicializada com um valor de 0.
 
 - **Padrão Regex**:
   - O script compila um padrão regex para encontrar números, 'on', 'off' e '=' no texto fornecido.
