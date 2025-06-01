@@ -1,0 +1,3605 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NOT
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> PROGRAM ID ; declaracoes bloco_simples .
+Rule 2     comando_composto -> BEGIN comandos END
+Rule 3     comandos -> comandos comando_semi
+Rule 4     comandos -> comando_semi
+Rule 5     comando_semi -> comando ;
+Rule 6     comando_semi -> comando
+Rule 7     bloco_simples -> BEGIN comandos END
+Rule 8     bloco_simples -> BEGIN declaracoes_variaveis comandos END
+Rule 9     declaracoes -> declaracoes_variaveis declaracoes_subprogramas declaracoes_variaveis_opt
+Rule 10    declaracoes -> declaracoes_subprogramas declaracoes_variaveis_opt
+Rule 11    declaracoes -> declaracoes_variaveis declaracoes_subprogramas
+Rule 12    declaracoes -> declaracoes_variaveis
+Rule 13    declaracoes -> declaracoes_subprogramas
+Rule 14    declaracoes -> empty
+Rule 15    declaracoes_variaveis_opt -> declaracoes_variaveis
+Rule 16    declaracoes_variaveis_opt -> empty
+Rule 17    declaracoes_variaveis -> VAR lista_decl
+Rule 18    lista_decl -> lista_decl decl
+Rule 19    lista_decl -> decl
+Rule 20    decl -> lista_ids : tipo ;
+Rule 21    tipo -> TIPOVAR
+Rule 22    tipo -> TIPOSTRING
+Rule 23    tipo -> ARRAY [ NUMBER DOTDOT NUMBER ] OF TIPOVAR
+Rule 24    lista_ids -> identificador
+Rule 25    lista_ids -> lista_ids , identificador
+Rule 26    identificador -> ID
+Rule 27    identificador -> ID [ expressao ]
+Rule 28    declaracoes_subprogramas -> lista_subprogramas
+Rule 29    lista_subprogramas -> lista_subprogramas subprograma
+Rule 30    lista_subprogramas -> subprograma
+Rule 31    subprograma -> funcao
+Rule 32    subprograma -> procedimento
+Rule 33    funcao_header -> FUNCTION ID ( parametros ) : TIPOVAR ;
+Rule 34    funcao -> funcao_header bloco_simples
+Rule 35    procedimento -> PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ;
+Rule 36    atribuicao -> ID ASSIGN expressao
+Rule 37    parametros -> lista_param
+Rule 38    parametros -> empty
+Rule 39    lista_param -> lista_param ; param
+Rule 40    lista_param -> param
+Rule 41    param -> lista_ids : tipo
+Rule 42    comando -> atribuicao
+Rule 43    comando -> comando_if
+Rule 44    comando -> comando_for
+Rule 45    comando -> comando_while
+Rule 46    comando -> comando_composto
+Rule 47    comando -> comando_write
+Rule 48    comando -> comando_read
+Rule 49    comando -> chamada_funcao
+Rule 50    comando_write -> WRITELN ( lista_exp )
+Rule 51    comando_read -> READLN ( lista_ids )
+Rule 52    comando_if -> IF expressao THEN comando ELSE comando
+Rule 53    comando_if -> IF expressao THEN comando
+Rule 54    comando_for -> FOR ID ASSIGN expressao TO expressao DO comando
+Rule 55    comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando
+Rule 56    comando_while -> WHILE expressao DO comando
+Rule 57    lista_exp -> expressao
+Rule 58    lista_exp -> lista_exp , expressao
+Rule 59    argumentos -> lista_exp
+Rule 60    argumentos -> empty
+Rule 61    expressao -> expressao OR expressao1
+Rule 62    expressao -> expressao1
+Rule 63    expressao1 -> expressao1 AND expressao2
+Rule 64    expressao1 -> expressao2
+Rule 65    expressao2 -> ID [ expressao ]
+Rule 66    expressao2 -> expressao3 relop expressao3
+Rule 67    expressao2 -> expressao3
+Rule 68    relop -> EQ
+Rule 69    relop -> NEQ
+Rule 70    relop -> LT
+Rule 71    relop -> LE
+Rule 72    relop -> GT
+Rule 73    relop -> GE
+Rule 74    expressao3 -> expressao3 addop termo
+Rule 75    expressao3 -> termo
+Rule 76    addop -> +
+Rule 77    addop -> -
+Rule 78    termo -> termo mulop fator
+Rule 79    termo -> fator
+Rule 80    mulop -> *
+Rule 81    mulop -> /
+Rule 82    mulop -> DIV
+Rule 83    mulop -> MOD
+Rule 84    fator -> NUMBER
+Rule 85    fator -> STRING
+Rule 86    fator -> TRUE
+Rule 87    fator -> FALSE
+Rule 88    fator -> ID
+Rule 89    fator -> ID [ expressao ]
+Rule 90    fator -> ( expressao )
+Rule 91    fator -> chamada_funcao
+Rule 92    chamada_funcao -> ID ( argumentos )
+Rule 93    empty -> <empty>
+
+Terminals, with rules where they appear
+
+(                    : 33 35 50 51 90 92
+)                    : 33 35 50 51 90 92
+*                    : 80
++                    : 76
+,                    : 25 58
+-                    : 77
+.                    : 1
+/                    : 81
+:                    : 20 33 41
+;                    : 1 5 20 33 35 35 39
+AND                  : 63
+ARRAY                : 23
+ASSIGN               : 36 54 55
+BEGIN                : 2 7 8
+DIV                  : 82
+DO                   : 54 55 56
+DOTDOT               : 23
+DOWNTO               : 55
+ELSE                 : 52
+END                  : 2 7 8
+EQ                   : 68
+FALSE                : 87
+FOR                  : 54 55
+FUNCTION             : 33
+GE                   : 73
+GT                   : 72
+ID                   : 1 26 27 33 35 36 54 55 65 88 89 92
+IF                   : 52 53
+LE                   : 71
+LT                   : 70
+MOD                  : 83
+NEQ                  : 69
+NOT                  : 
+NUMBER               : 23 23 84
+OF                   : 23
+OR                   : 61
+PROCEDURE            : 35
+PROGRAM              : 1
+READLN               : 51
+STRING               : 85
+THEN                 : 52 53
+TIPOSTRING           : 22
+TIPOVAR              : 21 23 33
+TO                   : 54
+TRUE                 : 86
+VAR                  : 17
+WHILE                : 56
+WRITELN              : 50
+[                    : 23 27 65 89
+]                    : 23 27 65 89
+error                : 
+
+Nonterminals, with rules where they appear
+
+addop                : 74
+argumentos           : 92
+atribuicao           : 42
+bloco_simples        : 1 34 35
+chamada_funcao       : 49 91
+comando              : 5 6 52 52 53 54 55 56
+comando_composto     : 46
+comando_for          : 44
+comando_if           : 43
+comando_read         : 48
+comando_semi         : 3 4
+comando_while        : 45
+comando_write        : 47
+comandos             : 2 3 7 8
+decl                 : 18 19
+declaracoes          : 1
+declaracoes_subprogramas : 9 10 11 13
+declaracoes_variaveis : 8 9 11 12 15
+declaracoes_variaveis_opt : 9 10 35
+empty                : 14 16 38 60
+expressao            : 27 36 52 53 54 54 55 55 56 57 58 61 65 89 90
+expressao1           : 61 62 63
+expressao2           : 63 64
+expressao3           : 66 66 67 74
+fator                : 78 79
+funcao               : 31
+funcao_header        : 34
+identificador        : 24 25
+lista_decl           : 17 18
+lista_exp            : 50 58 59
+lista_ids            : 20 25 41 51
+lista_param          : 37 39
+lista_subprogramas   : 28 29
+mulop                : 78
+param                : 39 40
+parametros           : 33 35
+procedimento         : 32
+programa             : 0
+relop                : 66
+subprograma          : 29 30
+termo                : 74 75 78
+tipo                 : 20 41
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . PROGRAM ID ; declaracoes bloco_simples .
+
+    PROGRAM         shift and go to state 2
+
+    programa                       shift and go to state 1
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> PROGRAM . ID ; declaracoes bloco_simples .
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) programa -> PROGRAM ID . ; declaracoes bloco_simples .
+
+    ;               shift and go to state 4
+
+
+state 4
+
+    (1) programa -> PROGRAM ID ; . declaracoes bloco_simples .
+    (9) declaracoes -> . declaracoes_variaveis declaracoes_subprogramas declaracoes_variaveis_opt
+    (10) declaracoes -> . declaracoes_subprogramas declaracoes_variaveis_opt
+    (11) declaracoes -> . declaracoes_variaveis declaracoes_subprogramas
+    (12) declaracoes -> . declaracoes_variaveis
+    (13) declaracoes -> . declaracoes_subprogramas
+    (14) declaracoes -> . empty
+    (17) declaracoes_variaveis -> . VAR lista_decl
+    (28) declaracoes_subprogramas -> . lista_subprogramas
+    (93) empty -> .
+    (29) lista_subprogramas -> . lista_subprogramas subprograma
+    (30) lista_subprogramas -> . subprograma
+    (31) subprograma -> . funcao
+    (32) subprograma -> . procedimento
+    (34) funcao -> . funcao_header bloco_simples
+    (35) procedimento -> . PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ;
+    (33) funcao_header -> . FUNCTION ID ( parametros ) : TIPOVAR ;
+
+    VAR             shift and go to state 9
+    BEGIN           reduce using rule 93 (empty -> .)
+    PROCEDURE       shift and go to state 15
+    FUNCTION        shift and go to state 16
+
+    declaracoes                    shift and go to state 5
+    declaracoes_variaveis          shift and go to state 6
+    declaracoes_subprogramas       shift and go to state 7
+    empty                          shift and go to state 8
+    lista_subprogramas             shift and go to state 10
+    subprograma                    shift and go to state 11
+    funcao                         shift and go to state 12
+    procedimento                   shift and go to state 13
+    funcao_header                  shift and go to state 14
+
+state 5
+
+    (1) programa -> PROGRAM ID ; declaracoes . bloco_simples .
+    (7) bloco_simples -> . BEGIN comandos END
+    (8) bloco_simples -> . BEGIN declaracoes_variaveis comandos END
+
+    BEGIN           shift and go to state 18
+
+    bloco_simples                  shift and go to state 17
+
+state 6
+
+    (9) declaracoes -> declaracoes_variaveis . declaracoes_subprogramas declaracoes_variaveis_opt
+    (11) declaracoes -> declaracoes_variaveis . declaracoes_subprogramas
+    (12) declaracoes -> declaracoes_variaveis .
+    (28) declaracoes_subprogramas -> . lista_subprogramas
+    (29) lista_subprogramas -> . lista_subprogramas subprograma
+    (30) lista_subprogramas -> . subprograma
+    (31) subprograma -> . funcao
+    (32) subprograma -> . procedimento
+    (34) funcao -> . funcao_header bloco_simples
+    (35) procedimento -> . PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ;
+    (33) funcao_header -> . FUNCTION ID ( parametros ) : TIPOVAR ;
+
+    BEGIN           reduce using rule 12 (declaracoes -> declaracoes_variaveis .)
+    PROCEDURE       shift and go to state 15
+    FUNCTION        shift and go to state 16
+
+    declaracoes_subprogramas       shift and go to state 19
+    lista_subprogramas             shift and go to state 10
+    subprograma                    shift and go to state 11
+    funcao                         shift and go to state 12
+    procedimento                   shift and go to state 13
+    funcao_header                  shift and go to state 14
+
+state 7
+
+    (10) declaracoes -> declaracoes_subprogramas . declaracoes_variaveis_opt
+    (13) declaracoes -> declaracoes_subprogramas .
+    (15) declaracoes_variaveis_opt -> . declaracoes_variaveis
+    (16) declaracoes_variaveis_opt -> . empty
+    (17) declaracoes_variaveis -> . VAR lista_decl
+    (93) empty -> .
+
+  ! reduce/reduce conflict for BEGIN resolved using rule 13 (declaracoes -> declaracoes_subprogramas .)
+    BEGIN           reduce using rule 13 (declaracoes -> declaracoes_subprogramas .)
+    VAR             shift and go to state 9
+
+  ! BEGIN           [ reduce using rule 93 (empty -> .) ]
+
+    declaracoes_variaveis_opt      shift and go to state 20
+    declaracoes_variaveis          shift and go to state 21
+    empty                          shift and go to state 22
+
+state 8
+
+    (14) declaracoes -> empty .
+
+    BEGIN           reduce using rule 14 (declaracoes -> empty .)
+
+
+state 9
+
+    (17) declaracoes_variaveis -> VAR . lista_decl
+    (18) lista_decl -> . lista_decl decl
+    (19) lista_decl -> . decl
+    (20) decl -> . lista_ids : tipo ;
+    (24) lista_ids -> . identificador
+    (25) lista_ids -> . lista_ids , identificador
+    (26) identificador -> . ID
+    (27) identificador -> . ID [ expressao ]
+
+    ID              shift and go to state 27
+
+    lista_decl                     shift and go to state 23
+    decl                           shift and go to state 24
+    lista_ids                      shift and go to state 25
+    identificador                  shift and go to state 26
+
+state 10
+
+    (28) declaracoes_subprogramas -> lista_subprogramas .
+    (29) lista_subprogramas -> lista_subprogramas . subprograma
+    (31) subprograma -> . funcao
+    (32) subprograma -> . procedimento
+    (34) funcao -> . funcao_header bloco_simples
+    (35) procedimento -> . PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ;
+    (33) funcao_header -> . FUNCTION ID ( parametros ) : TIPOVAR ;
+
+    VAR             reduce using rule 28 (declaracoes_subprogramas -> lista_subprogramas .)
+    BEGIN           reduce using rule 28 (declaracoes_subprogramas -> lista_subprogramas .)
+    PROCEDURE       shift and go to state 15
+    FUNCTION        shift and go to state 16
+
+    subprograma                    shift and go to state 28
+    funcao                         shift and go to state 12
+    procedimento                   shift and go to state 13
+    funcao_header                  shift and go to state 14
+
+state 11
+
+    (30) lista_subprogramas -> subprograma .
+
+    PROCEDURE       reduce using rule 30 (lista_subprogramas -> subprograma .)
+    FUNCTION        reduce using rule 30 (lista_subprogramas -> subprograma .)
+    VAR             reduce using rule 30 (lista_subprogramas -> subprograma .)
+    BEGIN           reduce using rule 30 (lista_subprogramas -> subprograma .)
+
+
+state 12
+
+    (31) subprograma -> funcao .
+
+    PROCEDURE       reduce using rule 31 (subprograma -> funcao .)
+    FUNCTION        reduce using rule 31 (subprograma -> funcao .)
+    VAR             reduce using rule 31 (subprograma -> funcao .)
+    BEGIN           reduce using rule 31 (subprograma -> funcao .)
+
+
+state 13
+
+    (32) subprograma -> procedimento .
+
+    PROCEDURE       reduce using rule 32 (subprograma -> procedimento .)
+    FUNCTION        reduce using rule 32 (subprograma -> procedimento .)
+    VAR             reduce using rule 32 (subprograma -> procedimento .)
+    BEGIN           reduce using rule 32 (subprograma -> procedimento .)
+
+
+state 14
+
+    (34) funcao -> funcao_header . bloco_simples
+    (7) bloco_simples -> . BEGIN comandos END
+    (8) bloco_simples -> . BEGIN declaracoes_variaveis comandos END
+
+    BEGIN           shift and go to state 18
+
+    bloco_simples                  shift and go to state 29
+
+state 15
+
+    (35) procedimento -> PROCEDURE . ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ;
+
+    ID              shift and go to state 30
+
+
+state 16
+
+    (33) funcao_header -> FUNCTION . ID ( parametros ) : TIPOVAR ;
+
+    ID              shift and go to state 31
+
+
+state 17
+
+    (1) programa -> PROGRAM ID ; declaracoes bloco_simples . .
+
+    .               shift and go to state 32
+
+
+state 18
+
+    (7) bloco_simples -> BEGIN . comandos END
+    (8) bloco_simples -> BEGIN . declaracoes_variaveis comandos END
+    (3) comandos -> . comandos comando_semi
+    (4) comandos -> . comando_semi
+    (17) declaracoes_variaveis -> . VAR lista_decl
+    (5) comando_semi -> . comando ;
+    (6) comando_semi -> . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    VAR             shift and go to state 9
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comandos                       shift and go to state 34
+    declaracoes_variaveis          shift and go to state 35
+    comando_semi                   shift and go to state 36
+    comando                        shift and go to state 37
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 19
+
+    (9) declaracoes -> declaracoes_variaveis declaracoes_subprogramas . declaracoes_variaveis_opt
+    (11) declaracoes -> declaracoes_variaveis declaracoes_subprogramas .
+    (15) declaracoes_variaveis_opt -> . declaracoes_variaveis
+    (16) declaracoes_variaveis_opt -> . empty
+    (17) declaracoes_variaveis -> . VAR lista_decl
+    (93) empty -> .
+
+  ! reduce/reduce conflict for BEGIN resolved using rule 11 (declaracoes -> declaracoes_variaveis declaracoes_subprogramas .)
+    BEGIN           reduce using rule 11 (declaracoes -> declaracoes_variaveis declaracoes_subprogramas .)
+    VAR             shift and go to state 9
+
+  ! BEGIN           [ reduce using rule 93 (empty -> .) ]
+
+    declaracoes_variaveis          shift and go to state 21
+    declaracoes_variaveis_opt      shift and go to state 52
+    empty                          shift and go to state 22
+
+state 20
+
+    (10) declaracoes -> declaracoes_subprogramas declaracoes_variaveis_opt .
+
+    BEGIN           reduce using rule 10 (declaracoes -> declaracoes_subprogramas declaracoes_variaveis_opt .)
+
+
+state 21
+
+    (15) declaracoes_variaveis_opt -> declaracoes_variaveis .
+
+    BEGIN           reduce using rule 15 (declaracoes_variaveis_opt -> declaracoes_variaveis .)
+
+
+state 22
+
+    (16) declaracoes_variaveis_opt -> empty .
+
+    BEGIN           reduce using rule 16 (declaracoes_variaveis_opt -> empty .)
+
+
+state 23
+
+    (17) declaracoes_variaveis -> VAR lista_decl .
+    (18) lista_decl -> lista_decl . decl
+    (20) decl -> . lista_ids : tipo ;
+    (24) lista_ids -> . identificador
+    (25) lista_ids -> . lista_ids , identificador
+    (26) identificador -> . ID
+    (27) identificador -> . ID [ expressao ]
+
+  ! shift/reduce conflict for ID resolved as shift
+    PROCEDURE       reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .)
+    FUNCTION        reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .)
+    BEGIN           reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .)
+    IF              reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .)
+    FOR             reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .)
+    WHILE           reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .)
+    WRITELN         reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .)
+    READLN          reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .)
+    ID              shift and go to state 27
+
+  ! ID              [ reduce using rule 17 (declaracoes_variaveis -> VAR lista_decl .) ]
+
+    decl                           shift and go to state 53
+    lista_ids                      shift and go to state 25
+    identificador                  shift and go to state 26
+
+state 24
+
+    (19) lista_decl -> decl .
+
+    ID              reduce using rule 19 (lista_decl -> decl .)
+    PROCEDURE       reduce using rule 19 (lista_decl -> decl .)
+    FUNCTION        reduce using rule 19 (lista_decl -> decl .)
+    BEGIN           reduce using rule 19 (lista_decl -> decl .)
+    IF              reduce using rule 19 (lista_decl -> decl .)
+    FOR             reduce using rule 19 (lista_decl -> decl .)
+    WHILE           reduce using rule 19 (lista_decl -> decl .)
+    WRITELN         reduce using rule 19 (lista_decl -> decl .)
+    READLN          reduce using rule 19 (lista_decl -> decl .)
+
+
+state 25
+
+    (20) decl -> lista_ids . : tipo ;
+    (25) lista_ids -> lista_ids . , identificador
+
+    :               shift and go to state 54
+    ,               shift and go to state 55
+
+
+state 26
+
+    (24) lista_ids -> identificador .
+
+    :               reduce using rule 24 (lista_ids -> identificador .)
+    ,               reduce using rule 24 (lista_ids -> identificador .)
+    )               reduce using rule 24 (lista_ids -> identificador .)
+
+
+state 27
+
+    (26) identificador -> ID .
+    (27) identificador -> ID . [ expressao ]
+
+    :               reduce using rule 26 (identificador -> ID .)
+    ,               reduce using rule 26 (identificador -> ID .)
+    )               reduce using rule 26 (identificador -> ID .)
+    [               shift and go to state 56
+
+
+state 28
+
+    (29) lista_subprogramas -> lista_subprogramas subprograma .
+
+    PROCEDURE       reduce using rule 29 (lista_subprogramas -> lista_subprogramas subprograma .)
+    FUNCTION        reduce using rule 29 (lista_subprogramas -> lista_subprogramas subprograma .)
+    VAR             reduce using rule 29 (lista_subprogramas -> lista_subprogramas subprograma .)
+    BEGIN           reduce using rule 29 (lista_subprogramas -> lista_subprogramas subprograma .)
+
+
+state 29
+
+    (34) funcao -> funcao_header bloco_simples .
+
+    PROCEDURE       reduce using rule 34 (funcao -> funcao_header bloco_simples .)
+    FUNCTION        reduce using rule 34 (funcao -> funcao_header bloco_simples .)
+    VAR             reduce using rule 34 (funcao -> funcao_header bloco_simples .)
+    BEGIN           reduce using rule 34 (funcao -> funcao_header bloco_simples .)
+
+
+state 30
+
+    (35) procedimento -> PROCEDURE ID . ( parametros ) ; declaracoes_variaveis_opt bloco_simples ;
+
+    (               shift and go to state 57
+
+
+state 31
+
+    (33) funcao_header -> FUNCTION ID . ( parametros ) : TIPOVAR ;
+
+    (               shift and go to state 58
+
+
+state 32
+
+    (1) programa -> PROGRAM ID ; declaracoes bloco_simples . .
+
+    $end            reduce using rule 1 (programa -> PROGRAM ID ; declaracoes bloco_simples . .)
+
+
+state 33
+
+    (2) comando_composto -> BEGIN . comandos END
+    (3) comandos -> . comandos comando_semi
+    (4) comandos -> . comando_semi
+    (5) comando_semi -> . comando ;
+    (6) comando_semi -> . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comandos                       shift and go to state 59
+    comando_semi                   shift and go to state 36
+    comando                        shift and go to state 37
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 34
+
+    (7) bloco_simples -> BEGIN comandos . END
+    (3) comandos -> comandos . comando_semi
+    (5) comando_semi -> . comando ;
+    (6) comando_semi -> . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    END             shift and go to state 60
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comando_semi                   shift and go to state 61
+    comando                        shift and go to state 37
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 35
+
+    (8) bloco_simples -> BEGIN declaracoes_variaveis . comandos END
+    (3) comandos -> . comandos comando_semi
+    (4) comandos -> . comando_semi
+    (5) comando_semi -> . comando ;
+    (6) comando_semi -> . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comandos                       shift and go to state 62
+    comando_semi                   shift and go to state 36
+    comando                        shift and go to state 37
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 36
+
+    (4) comandos -> comando_semi .
+
+    END             reduce using rule 4 (comandos -> comando_semi .)
+    ID              reduce using rule 4 (comandos -> comando_semi .)
+    IF              reduce using rule 4 (comandos -> comando_semi .)
+    FOR             reduce using rule 4 (comandos -> comando_semi .)
+    WHILE           reduce using rule 4 (comandos -> comando_semi .)
+    BEGIN           reduce using rule 4 (comandos -> comando_semi .)
+    WRITELN         reduce using rule 4 (comandos -> comando_semi .)
+    READLN          reduce using rule 4 (comandos -> comando_semi .)
+
+
+state 37
+
+    (5) comando_semi -> comando . ;
+    (6) comando_semi -> comando .
+
+    ;               shift and go to state 63
+    END             reduce using rule 6 (comando_semi -> comando .)
+    ID              reduce using rule 6 (comando_semi -> comando .)
+    IF              reduce using rule 6 (comando_semi -> comando .)
+    FOR             reduce using rule 6 (comando_semi -> comando .)
+    WHILE           reduce using rule 6 (comando_semi -> comando .)
+    BEGIN           reduce using rule 6 (comando_semi -> comando .)
+    WRITELN         reduce using rule 6 (comando_semi -> comando .)
+    READLN          reduce using rule 6 (comando_semi -> comando .)
+
+
+state 38
+
+    (42) comando -> atribuicao .
+
+    ;               reduce using rule 42 (comando -> atribuicao .)
+    END             reduce using rule 42 (comando -> atribuicao .)
+    ID              reduce using rule 42 (comando -> atribuicao .)
+    IF              reduce using rule 42 (comando -> atribuicao .)
+    FOR             reduce using rule 42 (comando -> atribuicao .)
+    WHILE           reduce using rule 42 (comando -> atribuicao .)
+    BEGIN           reduce using rule 42 (comando -> atribuicao .)
+    WRITELN         reduce using rule 42 (comando -> atribuicao .)
+    READLN          reduce using rule 42 (comando -> atribuicao .)
+    ELSE            reduce using rule 42 (comando -> atribuicao .)
+
+
+state 39
+
+    (43) comando -> comando_if .
+
+    ;               reduce using rule 43 (comando -> comando_if .)
+    END             reduce using rule 43 (comando -> comando_if .)
+    ID              reduce using rule 43 (comando -> comando_if .)
+    IF              reduce using rule 43 (comando -> comando_if .)
+    FOR             reduce using rule 43 (comando -> comando_if .)
+    WHILE           reduce using rule 43 (comando -> comando_if .)
+    BEGIN           reduce using rule 43 (comando -> comando_if .)
+    WRITELN         reduce using rule 43 (comando -> comando_if .)
+    READLN          reduce using rule 43 (comando -> comando_if .)
+    ELSE            reduce using rule 43 (comando -> comando_if .)
+
+
+state 40
+
+    (44) comando -> comando_for .
+
+    ;               reduce using rule 44 (comando -> comando_for .)
+    END             reduce using rule 44 (comando -> comando_for .)
+    ID              reduce using rule 44 (comando -> comando_for .)
+    IF              reduce using rule 44 (comando -> comando_for .)
+    FOR             reduce using rule 44 (comando -> comando_for .)
+    WHILE           reduce using rule 44 (comando -> comando_for .)
+    BEGIN           reduce using rule 44 (comando -> comando_for .)
+    WRITELN         reduce using rule 44 (comando -> comando_for .)
+    READLN          reduce using rule 44 (comando -> comando_for .)
+    ELSE            reduce using rule 44 (comando -> comando_for .)
+
+
+state 41
+
+    (45) comando -> comando_while .
+
+    ;               reduce using rule 45 (comando -> comando_while .)
+    END             reduce using rule 45 (comando -> comando_while .)
+    ID              reduce using rule 45 (comando -> comando_while .)
+    IF              reduce using rule 45 (comando -> comando_while .)
+    FOR             reduce using rule 45 (comando -> comando_while .)
+    WHILE           reduce using rule 45 (comando -> comando_while .)
+    BEGIN           reduce using rule 45 (comando -> comando_while .)
+    WRITELN         reduce using rule 45 (comando -> comando_while .)
+    READLN          reduce using rule 45 (comando -> comando_while .)
+    ELSE            reduce using rule 45 (comando -> comando_while .)
+
+
+state 42
+
+    (46) comando -> comando_composto .
+
+    ;               reduce using rule 46 (comando -> comando_composto .)
+    END             reduce using rule 46 (comando -> comando_composto .)
+    ID              reduce using rule 46 (comando -> comando_composto .)
+    IF              reduce using rule 46 (comando -> comando_composto .)
+    FOR             reduce using rule 46 (comando -> comando_composto .)
+    WHILE           reduce using rule 46 (comando -> comando_composto .)
+    BEGIN           reduce using rule 46 (comando -> comando_composto .)
+    WRITELN         reduce using rule 46 (comando -> comando_composto .)
+    READLN          reduce using rule 46 (comando -> comando_composto .)
+    ELSE            reduce using rule 46 (comando -> comando_composto .)
+
+
+state 43
+
+    (47) comando -> comando_write .
+
+    ;               reduce using rule 47 (comando -> comando_write .)
+    END             reduce using rule 47 (comando -> comando_write .)
+    ID              reduce using rule 47 (comando -> comando_write .)
+    IF              reduce using rule 47 (comando -> comando_write .)
+    FOR             reduce using rule 47 (comando -> comando_write .)
+    WHILE           reduce using rule 47 (comando -> comando_write .)
+    BEGIN           reduce using rule 47 (comando -> comando_write .)
+    WRITELN         reduce using rule 47 (comando -> comando_write .)
+    READLN          reduce using rule 47 (comando -> comando_write .)
+    ELSE            reduce using rule 47 (comando -> comando_write .)
+
+
+state 44
+
+    (48) comando -> comando_read .
+
+    ;               reduce using rule 48 (comando -> comando_read .)
+    END             reduce using rule 48 (comando -> comando_read .)
+    ID              reduce using rule 48 (comando -> comando_read .)
+    IF              reduce using rule 48 (comando -> comando_read .)
+    FOR             reduce using rule 48 (comando -> comando_read .)
+    WHILE           reduce using rule 48 (comando -> comando_read .)
+    BEGIN           reduce using rule 48 (comando -> comando_read .)
+    WRITELN         reduce using rule 48 (comando -> comando_read .)
+    READLN          reduce using rule 48 (comando -> comando_read .)
+    ELSE            reduce using rule 48 (comando -> comando_read .)
+
+
+state 45
+
+    (49) comando -> chamada_funcao .
+
+    ;               reduce using rule 49 (comando -> chamada_funcao .)
+    END             reduce using rule 49 (comando -> chamada_funcao .)
+    ID              reduce using rule 49 (comando -> chamada_funcao .)
+    IF              reduce using rule 49 (comando -> chamada_funcao .)
+    FOR             reduce using rule 49 (comando -> chamada_funcao .)
+    WHILE           reduce using rule 49 (comando -> chamada_funcao .)
+    BEGIN           reduce using rule 49 (comando -> chamada_funcao .)
+    WRITELN         reduce using rule 49 (comando -> chamada_funcao .)
+    READLN          reduce using rule 49 (comando -> chamada_funcao .)
+    ELSE            reduce using rule 49 (comando -> chamada_funcao .)
+
+
+state 46
+
+    (36) atribuicao -> ID . ASSIGN expressao
+    (92) chamada_funcao -> ID . ( argumentos )
+
+    ASSIGN          shift and go to state 64
+    (               shift and go to state 65
+
+
+state 47
+
+    (52) comando_if -> IF . expressao THEN comando ELSE comando
+    (53) comando_if -> IF . expressao THEN comando
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 66
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 48
+
+    (54) comando_for -> FOR . ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> FOR . ID ASSIGN expressao DOWNTO expressao DO comando
+
+    ID              shift and go to state 79
+
+
+state 49
+
+    (56) comando_while -> WHILE . expressao DO comando
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 80
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 50
+
+    (50) comando_write -> WRITELN . ( lista_exp )
+
+    (               shift and go to state 81
+
+
+state 51
+
+    (51) comando_read -> READLN . ( lista_ids )
+
+    (               shift and go to state 82
+
+
+state 52
+
+    (9) declaracoes -> declaracoes_variaveis declaracoes_subprogramas declaracoes_variaveis_opt .
+
+    BEGIN           reduce using rule 9 (declaracoes -> declaracoes_variaveis declaracoes_subprogramas declaracoes_variaveis_opt .)
+
+
+state 53
+
+    (18) lista_decl -> lista_decl decl .
+
+    ID              reduce using rule 18 (lista_decl -> lista_decl decl .)
+    PROCEDURE       reduce using rule 18 (lista_decl -> lista_decl decl .)
+    FUNCTION        reduce using rule 18 (lista_decl -> lista_decl decl .)
+    BEGIN           reduce using rule 18 (lista_decl -> lista_decl decl .)
+    IF              reduce using rule 18 (lista_decl -> lista_decl decl .)
+    FOR             reduce using rule 18 (lista_decl -> lista_decl decl .)
+    WHILE           reduce using rule 18 (lista_decl -> lista_decl decl .)
+    WRITELN         reduce using rule 18 (lista_decl -> lista_decl decl .)
+    READLN          reduce using rule 18 (lista_decl -> lista_decl decl .)
+
+
+state 54
+
+    (20) decl -> lista_ids : . tipo ;
+    (21) tipo -> . TIPOVAR
+    (22) tipo -> . TIPOSTRING
+    (23) tipo -> . ARRAY [ NUMBER DOTDOT NUMBER ] OF TIPOVAR
+
+    TIPOVAR         shift and go to state 84
+    TIPOSTRING      shift and go to state 85
+    ARRAY           shift and go to state 86
+
+    tipo                           shift and go to state 83
+
+state 55
+
+    (25) lista_ids -> lista_ids , . identificador
+    (26) identificador -> . ID
+    (27) identificador -> . ID [ expressao ]
+
+    ID              shift and go to state 27
+
+    identificador                  shift and go to state 87
+
+state 56
+
+    (27) identificador -> ID [ . expressao ]
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 88
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 57
+
+    (35) procedimento -> PROCEDURE ID ( . parametros ) ; declaracoes_variaveis_opt bloco_simples ;
+    (37) parametros -> . lista_param
+    (38) parametros -> . empty
+    (39) lista_param -> . lista_param ; param
+    (40) lista_param -> . param
+    (93) empty -> .
+    (41) param -> . lista_ids : tipo
+    (24) lista_ids -> . identificador
+    (25) lista_ids -> . lista_ids , identificador
+    (26) identificador -> . ID
+    (27) identificador -> . ID [ expressao ]
+
+    )               reduce using rule 93 (empty -> .)
+    ID              shift and go to state 27
+
+    parametros                     shift and go to state 89
+    lista_param                    shift and go to state 90
+    empty                          shift and go to state 91
+    param                          shift and go to state 92
+    lista_ids                      shift and go to state 93
+    identificador                  shift and go to state 26
+
+state 58
+
+    (33) funcao_header -> FUNCTION ID ( . parametros ) : TIPOVAR ;
+    (37) parametros -> . lista_param
+    (38) parametros -> . empty
+    (39) lista_param -> . lista_param ; param
+    (40) lista_param -> . param
+    (93) empty -> .
+    (41) param -> . lista_ids : tipo
+    (24) lista_ids -> . identificador
+    (25) lista_ids -> . lista_ids , identificador
+    (26) identificador -> . ID
+    (27) identificador -> . ID [ expressao ]
+
+    )               reduce using rule 93 (empty -> .)
+    ID              shift and go to state 27
+
+    parametros                     shift and go to state 94
+    lista_param                    shift and go to state 90
+    empty                          shift and go to state 91
+    param                          shift and go to state 92
+    lista_ids                      shift and go to state 93
+    identificador                  shift and go to state 26
+
+state 59
+
+    (2) comando_composto -> BEGIN comandos . END
+    (3) comandos -> comandos . comando_semi
+    (5) comando_semi -> . comando ;
+    (6) comando_semi -> . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    END             shift and go to state 95
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comando_semi                   shift and go to state 61
+    comando                        shift and go to state 37
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 60
+
+    (7) bloco_simples -> BEGIN comandos END .
+
+    .               reduce using rule 7 (bloco_simples -> BEGIN comandos END .)
+    PROCEDURE       reduce using rule 7 (bloco_simples -> BEGIN comandos END .)
+    FUNCTION        reduce using rule 7 (bloco_simples -> BEGIN comandos END .)
+    VAR             reduce using rule 7 (bloco_simples -> BEGIN comandos END .)
+    BEGIN           reduce using rule 7 (bloco_simples -> BEGIN comandos END .)
+    ;               reduce using rule 7 (bloco_simples -> BEGIN comandos END .)
+
+
+state 61
+
+    (3) comandos -> comandos comando_semi .
+
+    END             reduce using rule 3 (comandos -> comandos comando_semi .)
+    ID              reduce using rule 3 (comandos -> comandos comando_semi .)
+    IF              reduce using rule 3 (comandos -> comandos comando_semi .)
+    FOR             reduce using rule 3 (comandos -> comandos comando_semi .)
+    WHILE           reduce using rule 3 (comandos -> comandos comando_semi .)
+    BEGIN           reduce using rule 3 (comandos -> comandos comando_semi .)
+    WRITELN         reduce using rule 3 (comandos -> comandos comando_semi .)
+    READLN          reduce using rule 3 (comandos -> comandos comando_semi .)
+
+
+state 62
+
+    (8) bloco_simples -> BEGIN declaracoes_variaveis comandos . END
+    (3) comandos -> comandos . comando_semi
+    (5) comando_semi -> . comando ;
+    (6) comando_semi -> . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    END             shift and go to state 96
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comando_semi                   shift and go to state 61
+    comando                        shift and go to state 37
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 63
+
+    (5) comando_semi -> comando ; .
+
+    END             reduce using rule 5 (comando_semi -> comando ; .)
+    ID              reduce using rule 5 (comando_semi -> comando ; .)
+    IF              reduce using rule 5 (comando_semi -> comando ; .)
+    FOR             reduce using rule 5 (comando_semi -> comando ; .)
+    WHILE           reduce using rule 5 (comando_semi -> comando ; .)
+    BEGIN           reduce using rule 5 (comando_semi -> comando ; .)
+    WRITELN         reduce using rule 5 (comando_semi -> comando ; .)
+    READLN          reduce using rule 5 (comando_semi -> comando ; .)
+
+
+state 64
+
+    (36) atribuicao -> ID ASSIGN . expressao
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 97
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 65
+
+    (92) chamada_funcao -> ID ( . argumentos )
+    (59) argumentos -> . lista_exp
+    (60) argumentos -> . empty
+    (57) lista_exp -> . expressao
+    (58) lista_exp -> . lista_exp , expressao
+    (93) empty -> .
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    )               reduce using rule 93 (empty -> .)
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    argumentos                     shift and go to state 98
+    lista_exp                      shift and go to state 99
+    empty                          shift and go to state 100
+    expressao                      shift and go to state 101
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 66
+
+    (52) comando_if -> IF expressao . THEN comando ELSE comando
+    (53) comando_if -> IF expressao . THEN comando
+    (61) expressao -> expressao . OR expressao1
+
+    THEN            shift and go to state 102
+    OR              shift and go to state 103
+
+
+state 67
+
+    (62) expressao -> expressao1 .
+    (63) expressao1 -> expressao1 . AND expressao2
+
+    THEN            reduce using rule 62 (expressao -> expressao1 .)
+    OR              reduce using rule 62 (expressao -> expressao1 .)
+    DO              reduce using rule 62 (expressao -> expressao1 .)
+    ]               reduce using rule 62 (expressao -> expressao1 .)
+    ;               reduce using rule 62 (expressao -> expressao1 .)
+    END             reduce using rule 62 (expressao -> expressao1 .)
+    ID              reduce using rule 62 (expressao -> expressao1 .)
+    IF              reduce using rule 62 (expressao -> expressao1 .)
+    FOR             reduce using rule 62 (expressao -> expressao1 .)
+    WHILE           reduce using rule 62 (expressao -> expressao1 .)
+    BEGIN           reduce using rule 62 (expressao -> expressao1 .)
+    WRITELN         reduce using rule 62 (expressao -> expressao1 .)
+    READLN          reduce using rule 62 (expressao -> expressao1 .)
+    ELSE            reduce using rule 62 (expressao -> expressao1 .)
+    ,               reduce using rule 62 (expressao -> expressao1 .)
+    )               reduce using rule 62 (expressao -> expressao1 .)
+    TO              reduce using rule 62 (expressao -> expressao1 .)
+    DOWNTO          reduce using rule 62 (expressao -> expressao1 .)
+    AND             shift and go to state 104
+
+
+state 68
+
+    (64) expressao1 -> expressao2 .
+
+    AND             reduce using rule 64 (expressao1 -> expressao2 .)
+    THEN            reduce using rule 64 (expressao1 -> expressao2 .)
+    OR              reduce using rule 64 (expressao1 -> expressao2 .)
+    DO              reduce using rule 64 (expressao1 -> expressao2 .)
+    ]               reduce using rule 64 (expressao1 -> expressao2 .)
+    ;               reduce using rule 64 (expressao1 -> expressao2 .)
+    END             reduce using rule 64 (expressao1 -> expressao2 .)
+    ID              reduce using rule 64 (expressao1 -> expressao2 .)
+    IF              reduce using rule 64 (expressao1 -> expressao2 .)
+    FOR             reduce using rule 64 (expressao1 -> expressao2 .)
+    WHILE           reduce using rule 64 (expressao1 -> expressao2 .)
+    BEGIN           reduce using rule 64 (expressao1 -> expressao2 .)
+    WRITELN         reduce using rule 64 (expressao1 -> expressao2 .)
+    READLN          reduce using rule 64 (expressao1 -> expressao2 .)
+    ELSE            reduce using rule 64 (expressao1 -> expressao2 .)
+    ,               reduce using rule 64 (expressao1 -> expressao2 .)
+    )               reduce using rule 64 (expressao1 -> expressao2 .)
+    TO              reduce using rule 64 (expressao1 -> expressao2 .)
+    DOWNTO          reduce using rule 64 (expressao1 -> expressao2 .)
+
+
+state 69
+
+    (65) expressao2 -> ID . [ expressao ]
+    (88) fator -> ID .
+    (89) fator -> ID . [ expressao ]
+    (92) chamada_funcao -> ID . ( argumentos )
+
+    [               shift and go to state 105
+    *               reduce using rule 88 (fator -> ID .)
+    /               reduce using rule 88 (fator -> ID .)
+    DIV             reduce using rule 88 (fator -> ID .)
+    MOD             reduce using rule 88 (fator -> ID .)
+    EQ              reduce using rule 88 (fator -> ID .)
+    NEQ             reduce using rule 88 (fator -> ID .)
+    LT              reduce using rule 88 (fator -> ID .)
+    LE              reduce using rule 88 (fator -> ID .)
+    GT              reduce using rule 88 (fator -> ID .)
+    GE              reduce using rule 88 (fator -> ID .)
+    +               reduce using rule 88 (fator -> ID .)
+    -               reduce using rule 88 (fator -> ID .)
+    AND             reduce using rule 88 (fator -> ID .)
+    THEN            reduce using rule 88 (fator -> ID .)
+    OR              reduce using rule 88 (fator -> ID .)
+    DO              reduce using rule 88 (fator -> ID .)
+    ]               reduce using rule 88 (fator -> ID .)
+    ;               reduce using rule 88 (fator -> ID .)
+    END             reduce using rule 88 (fator -> ID .)
+    ID              reduce using rule 88 (fator -> ID .)
+    IF              reduce using rule 88 (fator -> ID .)
+    FOR             reduce using rule 88 (fator -> ID .)
+    WHILE           reduce using rule 88 (fator -> ID .)
+    BEGIN           reduce using rule 88 (fator -> ID .)
+    WRITELN         reduce using rule 88 (fator -> ID .)
+    READLN          reduce using rule 88 (fator -> ID .)
+    ELSE            reduce using rule 88 (fator -> ID .)
+    ,               reduce using rule 88 (fator -> ID .)
+    )               reduce using rule 88 (fator -> ID .)
+    TO              reduce using rule 88 (fator -> ID .)
+    DOWNTO          reduce using rule 88 (fator -> ID .)
+    (               shift and go to state 65
+
+
+state 70
+
+    (66) expressao2 -> expressao3 . relop expressao3
+    (67) expressao2 -> expressao3 .
+    (74) expressao3 -> expressao3 . addop termo
+    (68) relop -> . EQ
+    (69) relop -> . NEQ
+    (70) relop -> . LT
+    (71) relop -> . LE
+    (72) relop -> . GT
+    (73) relop -> . GE
+    (76) addop -> . +
+    (77) addop -> . -
+
+    AND             reduce using rule 67 (expressao2 -> expressao3 .)
+    THEN            reduce using rule 67 (expressao2 -> expressao3 .)
+    OR              reduce using rule 67 (expressao2 -> expressao3 .)
+    DO              reduce using rule 67 (expressao2 -> expressao3 .)
+    ]               reduce using rule 67 (expressao2 -> expressao3 .)
+    ;               reduce using rule 67 (expressao2 -> expressao3 .)
+    END             reduce using rule 67 (expressao2 -> expressao3 .)
+    ID              reduce using rule 67 (expressao2 -> expressao3 .)
+    IF              reduce using rule 67 (expressao2 -> expressao3 .)
+    FOR             reduce using rule 67 (expressao2 -> expressao3 .)
+    WHILE           reduce using rule 67 (expressao2 -> expressao3 .)
+    BEGIN           reduce using rule 67 (expressao2 -> expressao3 .)
+    WRITELN         reduce using rule 67 (expressao2 -> expressao3 .)
+    READLN          reduce using rule 67 (expressao2 -> expressao3 .)
+    ELSE            reduce using rule 67 (expressao2 -> expressao3 .)
+    ,               reduce using rule 67 (expressao2 -> expressao3 .)
+    )               reduce using rule 67 (expressao2 -> expressao3 .)
+    TO              reduce using rule 67 (expressao2 -> expressao3 .)
+    DOWNTO          reduce using rule 67 (expressao2 -> expressao3 .)
+    EQ              shift and go to state 108
+    NEQ             shift and go to state 109
+    LT              shift and go to state 110
+    LE              shift and go to state 111
+    GT              shift and go to state 112
+    GE              shift and go to state 113
+    +               shift and go to state 114
+    -               shift and go to state 115
+
+    relop                          shift and go to state 106
+    addop                          shift and go to state 107
+
+state 71
+
+    (75) expressao3 -> termo .
+    (78) termo -> termo . mulop fator
+    (80) mulop -> . *
+    (81) mulop -> . /
+    (82) mulop -> . DIV
+    (83) mulop -> . MOD
+
+    EQ              reduce using rule 75 (expressao3 -> termo .)
+    NEQ             reduce using rule 75 (expressao3 -> termo .)
+    LT              reduce using rule 75 (expressao3 -> termo .)
+    LE              reduce using rule 75 (expressao3 -> termo .)
+    GT              reduce using rule 75 (expressao3 -> termo .)
+    GE              reduce using rule 75 (expressao3 -> termo .)
+    +               reduce using rule 75 (expressao3 -> termo .)
+    -               reduce using rule 75 (expressao3 -> termo .)
+    AND             reduce using rule 75 (expressao3 -> termo .)
+    THEN            reduce using rule 75 (expressao3 -> termo .)
+    OR              reduce using rule 75 (expressao3 -> termo .)
+    DO              reduce using rule 75 (expressao3 -> termo .)
+    ]               reduce using rule 75 (expressao3 -> termo .)
+    ;               reduce using rule 75 (expressao3 -> termo .)
+    END             reduce using rule 75 (expressao3 -> termo .)
+    ID              reduce using rule 75 (expressao3 -> termo .)
+    IF              reduce using rule 75 (expressao3 -> termo .)
+    FOR             reduce using rule 75 (expressao3 -> termo .)
+    WHILE           reduce using rule 75 (expressao3 -> termo .)
+    BEGIN           reduce using rule 75 (expressao3 -> termo .)
+    WRITELN         reduce using rule 75 (expressao3 -> termo .)
+    READLN          reduce using rule 75 (expressao3 -> termo .)
+    ELSE            reduce using rule 75 (expressao3 -> termo .)
+    ,               reduce using rule 75 (expressao3 -> termo .)
+    )               reduce using rule 75 (expressao3 -> termo .)
+    TO              reduce using rule 75 (expressao3 -> termo .)
+    DOWNTO          reduce using rule 75 (expressao3 -> termo .)
+    *               shift and go to state 117
+    /               shift and go to state 118
+    DIV             shift and go to state 119
+    MOD             shift and go to state 120
+
+    mulop                          shift and go to state 116
+
+state 72
+
+    (79) termo -> fator .
+
+    *               reduce using rule 79 (termo -> fator .)
+    /               reduce using rule 79 (termo -> fator .)
+    DIV             reduce using rule 79 (termo -> fator .)
+    MOD             reduce using rule 79 (termo -> fator .)
+    EQ              reduce using rule 79 (termo -> fator .)
+    NEQ             reduce using rule 79 (termo -> fator .)
+    LT              reduce using rule 79 (termo -> fator .)
+    LE              reduce using rule 79 (termo -> fator .)
+    GT              reduce using rule 79 (termo -> fator .)
+    GE              reduce using rule 79 (termo -> fator .)
+    +               reduce using rule 79 (termo -> fator .)
+    -               reduce using rule 79 (termo -> fator .)
+    AND             reduce using rule 79 (termo -> fator .)
+    THEN            reduce using rule 79 (termo -> fator .)
+    OR              reduce using rule 79 (termo -> fator .)
+    DO              reduce using rule 79 (termo -> fator .)
+    ]               reduce using rule 79 (termo -> fator .)
+    ;               reduce using rule 79 (termo -> fator .)
+    END             reduce using rule 79 (termo -> fator .)
+    ID              reduce using rule 79 (termo -> fator .)
+    IF              reduce using rule 79 (termo -> fator .)
+    FOR             reduce using rule 79 (termo -> fator .)
+    WHILE           reduce using rule 79 (termo -> fator .)
+    BEGIN           reduce using rule 79 (termo -> fator .)
+    WRITELN         reduce using rule 79 (termo -> fator .)
+    READLN          reduce using rule 79 (termo -> fator .)
+    ELSE            reduce using rule 79 (termo -> fator .)
+    ,               reduce using rule 79 (termo -> fator .)
+    )               reduce using rule 79 (termo -> fator .)
+    TO              reduce using rule 79 (termo -> fator .)
+    DOWNTO          reduce using rule 79 (termo -> fator .)
+
+
+state 73
+
+    (84) fator -> NUMBER .
+
+    *               reduce using rule 84 (fator -> NUMBER .)
+    /               reduce using rule 84 (fator -> NUMBER .)
+    DIV             reduce using rule 84 (fator -> NUMBER .)
+    MOD             reduce using rule 84 (fator -> NUMBER .)
+    EQ              reduce using rule 84 (fator -> NUMBER .)
+    NEQ             reduce using rule 84 (fator -> NUMBER .)
+    LT              reduce using rule 84 (fator -> NUMBER .)
+    LE              reduce using rule 84 (fator -> NUMBER .)
+    GT              reduce using rule 84 (fator -> NUMBER .)
+    GE              reduce using rule 84 (fator -> NUMBER .)
+    +               reduce using rule 84 (fator -> NUMBER .)
+    -               reduce using rule 84 (fator -> NUMBER .)
+    AND             reduce using rule 84 (fator -> NUMBER .)
+    THEN            reduce using rule 84 (fator -> NUMBER .)
+    OR              reduce using rule 84 (fator -> NUMBER .)
+    DO              reduce using rule 84 (fator -> NUMBER .)
+    ]               reduce using rule 84 (fator -> NUMBER .)
+    ;               reduce using rule 84 (fator -> NUMBER .)
+    END             reduce using rule 84 (fator -> NUMBER .)
+    ID              reduce using rule 84 (fator -> NUMBER .)
+    IF              reduce using rule 84 (fator -> NUMBER .)
+    FOR             reduce using rule 84 (fator -> NUMBER .)
+    WHILE           reduce using rule 84 (fator -> NUMBER .)
+    BEGIN           reduce using rule 84 (fator -> NUMBER .)
+    WRITELN         reduce using rule 84 (fator -> NUMBER .)
+    READLN          reduce using rule 84 (fator -> NUMBER .)
+    ELSE            reduce using rule 84 (fator -> NUMBER .)
+    ,               reduce using rule 84 (fator -> NUMBER .)
+    )               reduce using rule 84 (fator -> NUMBER .)
+    TO              reduce using rule 84 (fator -> NUMBER .)
+    DOWNTO          reduce using rule 84 (fator -> NUMBER .)
+
+
+state 74
+
+    (85) fator -> STRING .
+
+    *               reduce using rule 85 (fator -> STRING .)
+    /               reduce using rule 85 (fator -> STRING .)
+    DIV             reduce using rule 85 (fator -> STRING .)
+    MOD             reduce using rule 85 (fator -> STRING .)
+    EQ              reduce using rule 85 (fator -> STRING .)
+    NEQ             reduce using rule 85 (fator -> STRING .)
+    LT              reduce using rule 85 (fator -> STRING .)
+    LE              reduce using rule 85 (fator -> STRING .)
+    GT              reduce using rule 85 (fator -> STRING .)
+    GE              reduce using rule 85 (fator -> STRING .)
+    +               reduce using rule 85 (fator -> STRING .)
+    -               reduce using rule 85 (fator -> STRING .)
+    AND             reduce using rule 85 (fator -> STRING .)
+    THEN            reduce using rule 85 (fator -> STRING .)
+    OR              reduce using rule 85 (fator -> STRING .)
+    DO              reduce using rule 85 (fator -> STRING .)
+    ]               reduce using rule 85 (fator -> STRING .)
+    ;               reduce using rule 85 (fator -> STRING .)
+    END             reduce using rule 85 (fator -> STRING .)
+    ID              reduce using rule 85 (fator -> STRING .)
+    IF              reduce using rule 85 (fator -> STRING .)
+    FOR             reduce using rule 85 (fator -> STRING .)
+    WHILE           reduce using rule 85 (fator -> STRING .)
+    BEGIN           reduce using rule 85 (fator -> STRING .)
+    WRITELN         reduce using rule 85 (fator -> STRING .)
+    READLN          reduce using rule 85 (fator -> STRING .)
+    ELSE            reduce using rule 85 (fator -> STRING .)
+    ,               reduce using rule 85 (fator -> STRING .)
+    )               reduce using rule 85 (fator -> STRING .)
+    TO              reduce using rule 85 (fator -> STRING .)
+    DOWNTO          reduce using rule 85 (fator -> STRING .)
+
+
+state 75
+
+    (86) fator -> TRUE .
+
+    *               reduce using rule 86 (fator -> TRUE .)
+    /               reduce using rule 86 (fator -> TRUE .)
+    DIV             reduce using rule 86 (fator -> TRUE .)
+    MOD             reduce using rule 86 (fator -> TRUE .)
+    EQ              reduce using rule 86 (fator -> TRUE .)
+    NEQ             reduce using rule 86 (fator -> TRUE .)
+    LT              reduce using rule 86 (fator -> TRUE .)
+    LE              reduce using rule 86 (fator -> TRUE .)
+    GT              reduce using rule 86 (fator -> TRUE .)
+    GE              reduce using rule 86 (fator -> TRUE .)
+    +               reduce using rule 86 (fator -> TRUE .)
+    -               reduce using rule 86 (fator -> TRUE .)
+    AND             reduce using rule 86 (fator -> TRUE .)
+    THEN            reduce using rule 86 (fator -> TRUE .)
+    OR              reduce using rule 86 (fator -> TRUE .)
+    DO              reduce using rule 86 (fator -> TRUE .)
+    ]               reduce using rule 86 (fator -> TRUE .)
+    ;               reduce using rule 86 (fator -> TRUE .)
+    END             reduce using rule 86 (fator -> TRUE .)
+    ID              reduce using rule 86 (fator -> TRUE .)
+    IF              reduce using rule 86 (fator -> TRUE .)
+    FOR             reduce using rule 86 (fator -> TRUE .)
+    WHILE           reduce using rule 86 (fator -> TRUE .)
+    BEGIN           reduce using rule 86 (fator -> TRUE .)
+    WRITELN         reduce using rule 86 (fator -> TRUE .)
+    READLN          reduce using rule 86 (fator -> TRUE .)
+    ELSE            reduce using rule 86 (fator -> TRUE .)
+    ,               reduce using rule 86 (fator -> TRUE .)
+    )               reduce using rule 86 (fator -> TRUE .)
+    TO              reduce using rule 86 (fator -> TRUE .)
+    DOWNTO          reduce using rule 86 (fator -> TRUE .)
+
+
+state 76
+
+    (87) fator -> FALSE .
+
+    *               reduce using rule 87 (fator -> FALSE .)
+    /               reduce using rule 87 (fator -> FALSE .)
+    DIV             reduce using rule 87 (fator -> FALSE .)
+    MOD             reduce using rule 87 (fator -> FALSE .)
+    EQ              reduce using rule 87 (fator -> FALSE .)
+    NEQ             reduce using rule 87 (fator -> FALSE .)
+    LT              reduce using rule 87 (fator -> FALSE .)
+    LE              reduce using rule 87 (fator -> FALSE .)
+    GT              reduce using rule 87 (fator -> FALSE .)
+    GE              reduce using rule 87 (fator -> FALSE .)
+    +               reduce using rule 87 (fator -> FALSE .)
+    -               reduce using rule 87 (fator -> FALSE .)
+    AND             reduce using rule 87 (fator -> FALSE .)
+    THEN            reduce using rule 87 (fator -> FALSE .)
+    OR              reduce using rule 87 (fator -> FALSE .)
+    DO              reduce using rule 87 (fator -> FALSE .)
+    ]               reduce using rule 87 (fator -> FALSE .)
+    ;               reduce using rule 87 (fator -> FALSE .)
+    END             reduce using rule 87 (fator -> FALSE .)
+    ID              reduce using rule 87 (fator -> FALSE .)
+    IF              reduce using rule 87 (fator -> FALSE .)
+    FOR             reduce using rule 87 (fator -> FALSE .)
+    WHILE           reduce using rule 87 (fator -> FALSE .)
+    BEGIN           reduce using rule 87 (fator -> FALSE .)
+    WRITELN         reduce using rule 87 (fator -> FALSE .)
+    READLN          reduce using rule 87 (fator -> FALSE .)
+    ELSE            reduce using rule 87 (fator -> FALSE .)
+    ,               reduce using rule 87 (fator -> FALSE .)
+    )               reduce using rule 87 (fator -> FALSE .)
+    TO              reduce using rule 87 (fator -> FALSE .)
+    DOWNTO          reduce using rule 87 (fator -> FALSE .)
+
+
+state 77
+
+    (90) fator -> ( . expressao )
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 121
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 78
+
+    (91) fator -> chamada_funcao .
+
+    *               reduce using rule 91 (fator -> chamada_funcao .)
+    /               reduce using rule 91 (fator -> chamada_funcao .)
+    DIV             reduce using rule 91 (fator -> chamada_funcao .)
+    MOD             reduce using rule 91 (fator -> chamada_funcao .)
+    EQ              reduce using rule 91 (fator -> chamada_funcao .)
+    NEQ             reduce using rule 91 (fator -> chamada_funcao .)
+    LT              reduce using rule 91 (fator -> chamada_funcao .)
+    LE              reduce using rule 91 (fator -> chamada_funcao .)
+    GT              reduce using rule 91 (fator -> chamada_funcao .)
+    GE              reduce using rule 91 (fator -> chamada_funcao .)
+    +               reduce using rule 91 (fator -> chamada_funcao .)
+    -               reduce using rule 91 (fator -> chamada_funcao .)
+    AND             reduce using rule 91 (fator -> chamada_funcao .)
+    THEN            reduce using rule 91 (fator -> chamada_funcao .)
+    OR              reduce using rule 91 (fator -> chamada_funcao .)
+    DO              reduce using rule 91 (fator -> chamada_funcao .)
+    ]               reduce using rule 91 (fator -> chamada_funcao .)
+    ;               reduce using rule 91 (fator -> chamada_funcao .)
+    END             reduce using rule 91 (fator -> chamada_funcao .)
+    ID              reduce using rule 91 (fator -> chamada_funcao .)
+    IF              reduce using rule 91 (fator -> chamada_funcao .)
+    FOR             reduce using rule 91 (fator -> chamada_funcao .)
+    WHILE           reduce using rule 91 (fator -> chamada_funcao .)
+    BEGIN           reduce using rule 91 (fator -> chamada_funcao .)
+    WRITELN         reduce using rule 91 (fator -> chamada_funcao .)
+    READLN          reduce using rule 91 (fator -> chamada_funcao .)
+    ELSE            reduce using rule 91 (fator -> chamada_funcao .)
+    ,               reduce using rule 91 (fator -> chamada_funcao .)
+    )               reduce using rule 91 (fator -> chamada_funcao .)
+    TO              reduce using rule 91 (fator -> chamada_funcao .)
+    DOWNTO          reduce using rule 91 (fator -> chamada_funcao .)
+
+
+state 79
+
+    (54) comando_for -> FOR ID . ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> FOR ID . ASSIGN expressao DOWNTO expressao DO comando
+
+    ASSIGN          shift and go to state 122
+
+
+state 80
+
+    (56) comando_while -> WHILE expressao . DO comando
+    (61) expressao -> expressao . OR expressao1
+
+    DO              shift and go to state 123
+    OR              shift and go to state 103
+
+
+state 81
+
+    (50) comando_write -> WRITELN ( . lista_exp )
+    (57) lista_exp -> . expressao
+    (58) lista_exp -> . lista_exp , expressao
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    lista_exp                      shift and go to state 124
+    expressao                      shift and go to state 101
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 82
+
+    (51) comando_read -> READLN ( . lista_ids )
+    (24) lista_ids -> . identificador
+    (25) lista_ids -> . lista_ids , identificador
+    (26) identificador -> . ID
+    (27) identificador -> . ID [ expressao ]
+
+    ID              shift and go to state 27
+
+    lista_ids                      shift and go to state 125
+    identificador                  shift and go to state 26
+
+state 83
+
+    (20) decl -> lista_ids : tipo . ;
+
+    ;               shift and go to state 126
+
+
+state 84
+
+    (21) tipo -> TIPOVAR .
+
+    ;               reduce using rule 21 (tipo -> TIPOVAR .)
+    )               reduce using rule 21 (tipo -> TIPOVAR .)
+
+
+state 85
+
+    (22) tipo -> TIPOSTRING .
+
+    ;               reduce using rule 22 (tipo -> TIPOSTRING .)
+    )               reduce using rule 22 (tipo -> TIPOSTRING .)
+
+
+state 86
+
+    (23) tipo -> ARRAY . [ NUMBER DOTDOT NUMBER ] OF TIPOVAR
+
+    [               shift and go to state 127
+
+
+state 87
+
+    (25) lista_ids -> lista_ids , identificador .
+
+    :               reduce using rule 25 (lista_ids -> lista_ids , identificador .)
+    ,               reduce using rule 25 (lista_ids -> lista_ids , identificador .)
+    )               reduce using rule 25 (lista_ids -> lista_ids , identificador .)
+
+
+state 88
+
+    (27) identificador -> ID [ expressao . ]
+    (61) expressao -> expressao . OR expressao1
+
+    ]               shift and go to state 128
+    OR              shift and go to state 103
+
+
+state 89
+
+    (35) procedimento -> PROCEDURE ID ( parametros . ) ; declaracoes_variaveis_opt bloco_simples ;
+
+    )               shift and go to state 129
+
+
+state 90
+
+    (37) parametros -> lista_param .
+    (39) lista_param -> lista_param . ; param
+
+    )               reduce using rule 37 (parametros -> lista_param .)
+    ;               shift and go to state 130
+
+
+state 91
+
+    (38) parametros -> empty .
+
+    )               reduce using rule 38 (parametros -> empty .)
+
+
+state 92
+
+    (40) lista_param -> param .
+
+    ;               reduce using rule 40 (lista_param -> param .)
+    )               reduce using rule 40 (lista_param -> param .)
+
+
+state 93
+
+    (41) param -> lista_ids . : tipo
+    (25) lista_ids -> lista_ids . , identificador
+
+    :               shift and go to state 131
+    ,               shift and go to state 55
+
+
+state 94
+
+    (33) funcao_header -> FUNCTION ID ( parametros . ) : TIPOVAR ;
+
+    )               shift and go to state 132
+
+
+state 95
+
+    (2) comando_composto -> BEGIN comandos END .
+
+    ;               reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    END             reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    ID              reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    IF              reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    FOR             reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    WHILE           reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    BEGIN           reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    WRITELN         reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    READLN          reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+    ELSE            reduce using rule 2 (comando_composto -> BEGIN comandos END .)
+
+
+state 96
+
+    (8) bloco_simples -> BEGIN declaracoes_variaveis comandos END .
+
+    .               reduce using rule 8 (bloco_simples -> BEGIN declaracoes_variaveis comandos END .)
+    PROCEDURE       reduce using rule 8 (bloco_simples -> BEGIN declaracoes_variaveis comandos END .)
+    FUNCTION        reduce using rule 8 (bloco_simples -> BEGIN declaracoes_variaveis comandos END .)
+    VAR             reduce using rule 8 (bloco_simples -> BEGIN declaracoes_variaveis comandos END .)
+    BEGIN           reduce using rule 8 (bloco_simples -> BEGIN declaracoes_variaveis comandos END .)
+    ;               reduce using rule 8 (bloco_simples -> BEGIN declaracoes_variaveis comandos END .)
+
+
+state 97
+
+    (36) atribuicao -> ID ASSIGN expressao .
+    (61) expressao -> expressao . OR expressao1
+
+    ;               reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    END             reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    ID              reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    IF              reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    FOR             reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    WHILE           reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    BEGIN           reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    WRITELN         reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    READLN          reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    ELSE            reduce using rule 36 (atribuicao -> ID ASSIGN expressao .)
+    OR              shift and go to state 103
+
+
+state 98
+
+    (92) chamada_funcao -> ID ( argumentos . )
+
+    )               shift and go to state 133
+
+
+state 99
+
+    (59) argumentos -> lista_exp .
+    (58) lista_exp -> lista_exp . , expressao
+
+    )               reduce using rule 59 (argumentos -> lista_exp .)
+    ,               shift and go to state 134
+
+
+state 100
+
+    (60) argumentos -> empty .
+
+    )               reduce using rule 60 (argumentos -> empty .)
+
+
+state 101
+
+    (57) lista_exp -> expressao .
+    (61) expressao -> expressao . OR expressao1
+
+    ,               reduce using rule 57 (lista_exp -> expressao .)
+    )               reduce using rule 57 (lista_exp -> expressao .)
+    OR              shift and go to state 103
+
+
+state 102
+
+    (52) comando_if -> IF expressao THEN . comando ELSE comando
+    (53) comando_if -> IF expressao THEN . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comando                        shift and go to state 135
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 103
+
+    (61) expressao -> expressao OR . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao1                     shift and go to state 136
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 104
+
+    (63) expressao1 -> expressao1 AND . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao2                     shift and go to state 137
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 105
+
+    (65) expressao2 -> ID [ . expressao ]
+    (89) fator -> ID [ . expressao ]
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 138
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 106
+
+    (66) expressao2 -> expressao3 relop . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    ID              shift and go to state 140
+    (               shift and go to state 77
+
+    expressao3                     shift and go to state 139
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 107
+
+    (74) expressao3 -> expressao3 addop . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    ID              shift and go to state 140
+    (               shift and go to state 77
+
+    termo                          shift and go to state 141
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 108
+
+    (68) relop -> EQ .
+
+    NUMBER          reduce using rule 68 (relop -> EQ .)
+    STRING          reduce using rule 68 (relop -> EQ .)
+    TRUE            reduce using rule 68 (relop -> EQ .)
+    FALSE           reduce using rule 68 (relop -> EQ .)
+    ID              reduce using rule 68 (relop -> EQ .)
+    (               reduce using rule 68 (relop -> EQ .)
+
+
+state 109
+
+    (69) relop -> NEQ .
+
+    NUMBER          reduce using rule 69 (relop -> NEQ .)
+    STRING          reduce using rule 69 (relop -> NEQ .)
+    TRUE            reduce using rule 69 (relop -> NEQ .)
+    FALSE           reduce using rule 69 (relop -> NEQ .)
+    ID              reduce using rule 69 (relop -> NEQ .)
+    (               reduce using rule 69 (relop -> NEQ .)
+
+
+state 110
+
+    (70) relop -> LT .
+
+    NUMBER          reduce using rule 70 (relop -> LT .)
+    STRING          reduce using rule 70 (relop -> LT .)
+    TRUE            reduce using rule 70 (relop -> LT .)
+    FALSE           reduce using rule 70 (relop -> LT .)
+    ID              reduce using rule 70 (relop -> LT .)
+    (               reduce using rule 70 (relop -> LT .)
+
+
+state 111
+
+    (71) relop -> LE .
+
+    NUMBER          reduce using rule 71 (relop -> LE .)
+    STRING          reduce using rule 71 (relop -> LE .)
+    TRUE            reduce using rule 71 (relop -> LE .)
+    FALSE           reduce using rule 71 (relop -> LE .)
+    ID              reduce using rule 71 (relop -> LE .)
+    (               reduce using rule 71 (relop -> LE .)
+
+
+state 112
+
+    (72) relop -> GT .
+
+    NUMBER          reduce using rule 72 (relop -> GT .)
+    STRING          reduce using rule 72 (relop -> GT .)
+    TRUE            reduce using rule 72 (relop -> GT .)
+    FALSE           reduce using rule 72 (relop -> GT .)
+    ID              reduce using rule 72 (relop -> GT .)
+    (               reduce using rule 72 (relop -> GT .)
+
+
+state 113
+
+    (73) relop -> GE .
+
+    NUMBER          reduce using rule 73 (relop -> GE .)
+    STRING          reduce using rule 73 (relop -> GE .)
+    TRUE            reduce using rule 73 (relop -> GE .)
+    FALSE           reduce using rule 73 (relop -> GE .)
+    ID              reduce using rule 73 (relop -> GE .)
+    (               reduce using rule 73 (relop -> GE .)
+
+
+state 114
+
+    (76) addop -> + .
+
+    NUMBER          reduce using rule 76 (addop -> + .)
+    STRING          reduce using rule 76 (addop -> + .)
+    TRUE            reduce using rule 76 (addop -> + .)
+    FALSE           reduce using rule 76 (addop -> + .)
+    ID              reduce using rule 76 (addop -> + .)
+    (               reduce using rule 76 (addop -> + .)
+
+
+state 115
+
+    (77) addop -> - .
+
+    NUMBER          reduce using rule 77 (addop -> - .)
+    STRING          reduce using rule 77 (addop -> - .)
+    TRUE            reduce using rule 77 (addop -> - .)
+    FALSE           reduce using rule 77 (addop -> - .)
+    ID              reduce using rule 77 (addop -> - .)
+    (               reduce using rule 77 (addop -> - .)
+
+
+state 116
+
+    (78) termo -> termo mulop . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    ID              shift and go to state 140
+    (               shift and go to state 77
+
+    fator                          shift and go to state 142
+    chamada_funcao                 shift and go to state 78
+
+state 117
+
+    (80) mulop -> * .
+
+    NUMBER          reduce using rule 80 (mulop -> * .)
+    STRING          reduce using rule 80 (mulop -> * .)
+    TRUE            reduce using rule 80 (mulop -> * .)
+    FALSE           reduce using rule 80 (mulop -> * .)
+    ID              reduce using rule 80 (mulop -> * .)
+    (               reduce using rule 80 (mulop -> * .)
+
+
+state 118
+
+    (81) mulop -> / .
+
+    NUMBER          reduce using rule 81 (mulop -> / .)
+    STRING          reduce using rule 81 (mulop -> / .)
+    TRUE            reduce using rule 81 (mulop -> / .)
+    FALSE           reduce using rule 81 (mulop -> / .)
+    ID              reduce using rule 81 (mulop -> / .)
+    (               reduce using rule 81 (mulop -> / .)
+
+
+state 119
+
+    (82) mulop -> DIV .
+
+    NUMBER          reduce using rule 82 (mulop -> DIV .)
+    STRING          reduce using rule 82 (mulop -> DIV .)
+    TRUE            reduce using rule 82 (mulop -> DIV .)
+    FALSE           reduce using rule 82 (mulop -> DIV .)
+    ID              reduce using rule 82 (mulop -> DIV .)
+    (               reduce using rule 82 (mulop -> DIV .)
+
+
+state 120
+
+    (83) mulop -> MOD .
+
+    NUMBER          reduce using rule 83 (mulop -> MOD .)
+    STRING          reduce using rule 83 (mulop -> MOD .)
+    TRUE            reduce using rule 83 (mulop -> MOD .)
+    FALSE           reduce using rule 83 (mulop -> MOD .)
+    ID              reduce using rule 83 (mulop -> MOD .)
+    (               reduce using rule 83 (mulop -> MOD .)
+
+
+state 121
+
+    (90) fator -> ( expressao . )
+    (61) expressao -> expressao . OR expressao1
+
+    )               shift and go to state 143
+    OR              shift and go to state 103
+
+
+state 122
+
+    (54) comando_for -> FOR ID ASSIGN . expressao TO expressao DO comando
+    (55) comando_for -> FOR ID ASSIGN . expressao DOWNTO expressao DO comando
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 144
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 123
+
+    (56) comando_while -> WHILE expressao DO . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comando                        shift and go to state 145
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 124
+
+    (50) comando_write -> WRITELN ( lista_exp . )
+    (58) lista_exp -> lista_exp . , expressao
+
+    )               shift and go to state 146
+    ,               shift and go to state 134
+
+
+state 125
+
+    (51) comando_read -> READLN ( lista_ids . )
+    (25) lista_ids -> lista_ids . , identificador
+
+    )               shift and go to state 147
+    ,               shift and go to state 55
+
+
+state 126
+
+    (20) decl -> lista_ids : tipo ; .
+
+    ID              reduce using rule 20 (decl -> lista_ids : tipo ; .)
+    PROCEDURE       reduce using rule 20 (decl -> lista_ids : tipo ; .)
+    FUNCTION        reduce using rule 20 (decl -> lista_ids : tipo ; .)
+    BEGIN           reduce using rule 20 (decl -> lista_ids : tipo ; .)
+    IF              reduce using rule 20 (decl -> lista_ids : tipo ; .)
+    FOR             reduce using rule 20 (decl -> lista_ids : tipo ; .)
+    WHILE           reduce using rule 20 (decl -> lista_ids : tipo ; .)
+    WRITELN         reduce using rule 20 (decl -> lista_ids : tipo ; .)
+    READLN          reduce using rule 20 (decl -> lista_ids : tipo ; .)
+
+
+state 127
+
+    (23) tipo -> ARRAY [ . NUMBER DOTDOT NUMBER ] OF TIPOVAR
+
+    NUMBER          shift and go to state 148
+
+
+state 128
+
+    (27) identificador -> ID [ expressao ] .
+
+    :               reduce using rule 27 (identificador -> ID [ expressao ] .)
+    ,               reduce using rule 27 (identificador -> ID [ expressao ] .)
+    )               reduce using rule 27 (identificador -> ID [ expressao ] .)
+
+
+state 129
+
+    (35) procedimento -> PROCEDURE ID ( parametros ) . ; declaracoes_variaveis_opt bloco_simples ;
+
+    ;               shift and go to state 149
+
+
+state 130
+
+    (39) lista_param -> lista_param ; . param
+    (41) param -> . lista_ids : tipo
+    (24) lista_ids -> . identificador
+    (25) lista_ids -> . lista_ids , identificador
+    (26) identificador -> . ID
+    (27) identificador -> . ID [ expressao ]
+
+    ID              shift and go to state 27
+
+    param                          shift and go to state 150
+    lista_ids                      shift and go to state 93
+    identificador                  shift and go to state 26
+
+state 131
+
+    (41) param -> lista_ids : . tipo
+    (21) tipo -> . TIPOVAR
+    (22) tipo -> . TIPOSTRING
+    (23) tipo -> . ARRAY [ NUMBER DOTDOT NUMBER ] OF TIPOVAR
+
+    TIPOVAR         shift and go to state 84
+    TIPOSTRING      shift and go to state 85
+    ARRAY           shift and go to state 86
+
+    tipo                           shift and go to state 151
+
+state 132
+
+    (33) funcao_header -> FUNCTION ID ( parametros ) . : TIPOVAR ;
+
+    :               shift and go to state 152
+
+
+state 133
+
+    (92) chamada_funcao -> ID ( argumentos ) .
+
+    ;               reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    END             reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    ID              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    IF              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    FOR             reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    WHILE           reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    BEGIN           reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    WRITELN         reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    READLN          reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    *               reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    /               reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    DIV             reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    MOD             reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    EQ              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    NEQ             reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    LT              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    LE              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    GT              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    GE              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    +               reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    -               reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    AND             reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    THEN            reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    OR              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    DO              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    ]               reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    ELSE            reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    ,               reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    )               reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    TO              reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+    DOWNTO          reduce using rule 92 (chamada_funcao -> ID ( argumentos ) .)
+
+
+state 134
+
+    (58) lista_exp -> lista_exp , . expressao
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 153
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 135
+
+    (52) comando_if -> IF expressao THEN comando . ELSE comando
+    (53) comando_if -> IF expressao THEN comando .
+
+    ELSE            shift and go to state 154
+    ;               reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+    END             reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+    ID              reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+    IF              reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+    FOR             reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+    WHILE           reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+    BEGIN           reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+    WRITELN         reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+    READLN          reduce using rule 53 (comando_if -> IF expressao THEN comando .)
+
+  ! ELSE            [ reduce using rule 53 (comando_if -> IF expressao THEN comando .) ]
+
+
+state 136
+
+    (61) expressao -> expressao OR expressao1 .
+    (63) expressao1 -> expressao1 . AND expressao2
+
+    THEN            reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    OR              reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    DO              reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    ]               reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    ;               reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    END             reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    ID              reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    IF              reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    FOR             reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    WHILE           reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    BEGIN           reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    WRITELN         reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    READLN          reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    ELSE            reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    ,               reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    )               reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    TO              reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    DOWNTO          reduce using rule 61 (expressao -> expressao OR expressao1 .)
+    AND             shift and go to state 104
+
+
+state 137
+
+    (63) expressao1 -> expressao1 AND expressao2 .
+
+    AND             reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    THEN            reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    OR              reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    DO              reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    ]               reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    ;               reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    END             reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    ID              reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    IF              reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    FOR             reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    WHILE           reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    BEGIN           reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    WRITELN         reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    READLN          reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    ELSE            reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    ,               reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    )               reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    TO              reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+    DOWNTO          reduce using rule 63 (expressao1 -> expressao1 AND expressao2 .)
+
+
+state 138
+
+    (65) expressao2 -> ID [ expressao . ]
+    (89) fator -> ID [ expressao . ]
+    (61) expressao -> expressao . OR expressao1
+
+    ]               shift and go to state 155
+    OR              shift and go to state 103
+
+
+state 139
+
+    (66) expressao2 -> expressao3 relop expressao3 .
+    (74) expressao3 -> expressao3 . addop termo
+    (76) addop -> . +
+    (77) addop -> . -
+
+    AND             reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    THEN            reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    OR              reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    DO              reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    ]               reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    ;               reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    END             reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    ID              reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    IF              reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    FOR             reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    WHILE           reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    BEGIN           reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    WRITELN         reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    READLN          reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    ELSE            reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    ,               reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    )               reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    TO              reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    DOWNTO          reduce using rule 66 (expressao2 -> expressao3 relop expressao3 .)
+    +               shift and go to state 114
+    -               shift and go to state 115
+
+    addop                          shift and go to state 107
+
+state 140
+
+    (88) fator -> ID .
+    (89) fator -> ID . [ expressao ]
+    (92) chamada_funcao -> ID . ( argumentos )
+
+    *               reduce using rule 88 (fator -> ID .)
+    /               reduce using rule 88 (fator -> ID .)
+    DIV             reduce using rule 88 (fator -> ID .)
+    MOD             reduce using rule 88 (fator -> ID .)
+    +               reduce using rule 88 (fator -> ID .)
+    -               reduce using rule 88 (fator -> ID .)
+    AND             reduce using rule 88 (fator -> ID .)
+    THEN            reduce using rule 88 (fator -> ID .)
+    OR              reduce using rule 88 (fator -> ID .)
+    DO              reduce using rule 88 (fator -> ID .)
+    ]               reduce using rule 88 (fator -> ID .)
+    ;               reduce using rule 88 (fator -> ID .)
+    END             reduce using rule 88 (fator -> ID .)
+    ID              reduce using rule 88 (fator -> ID .)
+    IF              reduce using rule 88 (fator -> ID .)
+    FOR             reduce using rule 88 (fator -> ID .)
+    WHILE           reduce using rule 88 (fator -> ID .)
+    BEGIN           reduce using rule 88 (fator -> ID .)
+    WRITELN         reduce using rule 88 (fator -> ID .)
+    READLN          reduce using rule 88 (fator -> ID .)
+    ELSE            reduce using rule 88 (fator -> ID .)
+    ,               reduce using rule 88 (fator -> ID .)
+    )               reduce using rule 88 (fator -> ID .)
+    TO              reduce using rule 88 (fator -> ID .)
+    DOWNTO          reduce using rule 88 (fator -> ID .)
+    EQ              reduce using rule 88 (fator -> ID .)
+    NEQ             reduce using rule 88 (fator -> ID .)
+    LT              reduce using rule 88 (fator -> ID .)
+    LE              reduce using rule 88 (fator -> ID .)
+    GT              reduce using rule 88 (fator -> ID .)
+    GE              reduce using rule 88 (fator -> ID .)
+    [               shift and go to state 156
+    (               shift and go to state 65
+
+
+state 141
+
+    (74) expressao3 -> expressao3 addop termo .
+    (78) termo -> termo . mulop fator
+    (80) mulop -> . *
+    (81) mulop -> . /
+    (82) mulop -> . DIV
+    (83) mulop -> . MOD
+
+    EQ              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    NEQ             reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    LT              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    LE              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    GT              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    GE              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    +               reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    -               reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    AND             reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    THEN            reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    OR              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    DO              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    ]               reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    ;               reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    END             reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    ID              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    IF              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    FOR             reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    WHILE           reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    BEGIN           reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    WRITELN         reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    READLN          reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    ELSE            reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    ,               reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    )               reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    TO              reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    DOWNTO          reduce using rule 74 (expressao3 -> expressao3 addop termo .)
+    *               shift and go to state 117
+    /               shift and go to state 118
+    DIV             shift and go to state 119
+    MOD             shift and go to state 120
+
+    mulop                          shift and go to state 116
+
+state 142
+
+    (78) termo -> termo mulop fator .
+
+    *               reduce using rule 78 (termo -> termo mulop fator .)
+    /               reduce using rule 78 (termo -> termo mulop fator .)
+    DIV             reduce using rule 78 (termo -> termo mulop fator .)
+    MOD             reduce using rule 78 (termo -> termo mulop fator .)
+    EQ              reduce using rule 78 (termo -> termo mulop fator .)
+    NEQ             reduce using rule 78 (termo -> termo mulop fator .)
+    LT              reduce using rule 78 (termo -> termo mulop fator .)
+    LE              reduce using rule 78 (termo -> termo mulop fator .)
+    GT              reduce using rule 78 (termo -> termo mulop fator .)
+    GE              reduce using rule 78 (termo -> termo mulop fator .)
+    +               reduce using rule 78 (termo -> termo mulop fator .)
+    -               reduce using rule 78 (termo -> termo mulop fator .)
+    AND             reduce using rule 78 (termo -> termo mulop fator .)
+    THEN            reduce using rule 78 (termo -> termo mulop fator .)
+    OR              reduce using rule 78 (termo -> termo mulop fator .)
+    DO              reduce using rule 78 (termo -> termo mulop fator .)
+    ]               reduce using rule 78 (termo -> termo mulop fator .)
+    ;               reduce using rule 78 (termo -> termo mulop fator .)
+    END             reduce using rule 78 (termo -> termo mulop fator .)
+    ID              reduce using rule 78 (termo -> termo mulop fator .)
+    IF              reduce using rule 78 (termo -> termo mulop fator .)
+    FOR             reduce using rule 78 (termo -> termo mulop fator .)
+    WHILE           reduce using rule 78 (termo -> termo mulop fator .)
+    BEGIN           reduce using rule 78 (termo -> termo mulop fator .)
+    WRITELN         reduce using rule 78 (termo -> termo mulop fator .)
+    READLN          reduce using rule 78 (termo -> termo mulop fator .)
+    ELSE            reduce using rule 78 (termo -> termo mulop fator .)
+    ,               reduce using rule 78 (termo -> termo mulop fator .)
+    )               reduce using rule 78 (termo -> termo mulop fator .)
+    TO              reduce using rule 78 (termo -> termo mulop fator .)
+    DOWNTO          reduce using rule 78 (termo -> termo mulop fator .)
+
+
+state 143
+
+    (90) fator -> ( expressao ) .
+
+    *               reduce using rule 90 (fator -> ( expressao ) .)
+    /               reduce using rule 90 (fator -> ( expressao ) .)
+    DIV             reduce using rule 90 (fator -> ( expressao ) .)
+    MOD             reduce using rule 90 (fator -> ( expressao ) .)
+    EQ              reduce using rule 90 (fator -> ( expressao ) .)
+    NEQ             reduce using rule 90 (fator -> ( expressao ) .)
+    LT              reduce using rule 90 (fator -> ( expressao ) .)
+    LE              reduce using rule 90 (fator -> ( expressao ) .)
+    GT              reduce using rule 90 (fator -> ( expressao ) .)
+    GE              reduce using rule 90 (fator -> ( expressao ) .)
+    +               reduce using rule 90 (fator -> ( expressao ) .)
+    -               reduce using rule 90 (fator -> ( expressao ) .)
+    AND             reduce using rule 90 (fator -> ( expressao ) .)
+    THEN            reduce using rule 90 (fator -> ( expressao ) .)
+    OR              reduce using rule 90 (fator -> ( expressao ) .)
+    DO              reduce using rule 90 (fator -> ( expressao ) .)
+    ]               reduce using rule 90 (fator -> ( expressao ) .)
+    ;               reduce using rule 90 (fator -> ( expressao ) .)
+    END             reduce using rule 90 (fator -> ( expressao ) .)
+    ID              reduce using rule 90 (fator -> ( expressao ) .)
+    IF              reduce using rule 90 (fator -> ( expressao ) .)
+    FOR             reduce using rule 90 (fator -> ( expressao ) .)
+    WHILE           reduce using rule 90 (fator -> ( expressao ) .)
+    BEGIN           reduce using rule 90 (fator -> ( expressao ) .)
+    WRITELN         reduce using rule 90 (fator -> ( expressao ) .)
+    READLN          reduce using rule 90 (fator -> ( expressao ) .)
+    ELSE            reduce using rule 90 (fator -> ( expressao ) .)
+    ,               reduce using rule 90 (fator -> ( expressao ) .)
+    )               reduce using rule 90 (fator -> ( expressao ) .)
+    TO              reduce using rule 90 (fator -> ( expressao ) .)
+    DOWNTO          reduce using rule 90 (fator -> ( expressao ) .)
+
+
+state 144
+
+    (54) comando_for -> FOR ID ASSIGN expressao . TO expressao DO comando
+    (55) comando_for -> FOR ID ASSIGN expressao . DOWNTO expressao DO comando
+    (61) expressao -> expressao . OR expressao1
+
+    TO              shift and go to state 157
+    DOWNTO          shift and go to state 158
+    OR              shift and go to state 103
+
+
+state 145
+
+    (56) comando_while -> WHILE expressao DO comando .
+
+    ;               reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    END             reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    ID              reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    IF              reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    FOR             reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    WHILE           reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    BEGIN           reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    WRITELN         reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    READLN          reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+    ELSE            reduce using rule 56 (comando_while -> WHILE expressao DO comando .)
+
+
+state 146
+
+    (50) comando_write -> WRITELN ( lista_exp ) .
+
+    ;               reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    END             reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    ID              reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    IF              reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    FOR             reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    WHILE           reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    BEGIN           reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    WRITELN         reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    READLN          reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+    ELSE            reduce using rule 50 (comando_write -> WRITELN ( lista_exp ) .)
+
+
+state 147
+
+    (51) comando_read -> READLN ( lista_ids ) .
+
+    ;               reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    END             reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    ID              reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    IF              reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    FOR             reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    WHILE           reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    BEGIN           reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    WRITELN         reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    READLN          reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+    ELSE            reduce using rule 51 (comando_read -> READLN ( lista_ids ) .)
+
+
+state 148
+
+    (23) tipo -> ARRAY [ NUMBER . DOTDOT NUMBER ] OF TIPOVAR
+
+    DOTDOT          shift and go to state 159
+
+
+state 149
+
+    (35) procedimento -> PROCEDURE ID ( parametros ) ; . declaracoes_variaveis_opt bloco_simples ;
+    (15) declaracoes_variaveis_opt -> . declaracoes_variaveis
+    (16) declaracoes_variaveis_opt -> . empty
+    (17) declaracoes_variaveis -> . VAR lista_decl
+    (93) empty -> .
+
+    VAR             shift and go to state 9
+    BEGIN           reduce using rule 93 (empty -> .)
+
+    declaracoes_variaveis_opt      shift and go to state 160
+    declaracoes_variaveis          shift and go to state 21
+    empty                          shift and go to state 22
+
+state 150
+
+    (39) lista_param -> lista_param ; param .
+
+    ;               reduce using rule 39 (lista_param -> lista_param ; param .)
+    )               reduce using rule 39 (lista_param -> lista_param ; param .)
+
+
+state 151
+
+    (41) param -> lista_ids : tipo .
+
+    ;               reduce using rule 41 (param -> lista_ids : tipo .)
+    )               reduce using rule 41 (param -> lista_ids : tipo .)
+
+
+state 152
+
+    (33) funcao_header -> FUNCTION ID ( parametros ) : . TIPOVAR ;
+
+    TIPOVAR         shift and go to state 161
+
+
+state 153
+
+    (58) lista_exp -> lista_exp , expressao .
+    (61) expressao -> expressao . OR expressao1
+
+    ,               reduce using rule 58 (lista_exp -> lista_exp , expressao .)
+    )               reduce using rule 58 (lista_exp -> lista_exp , expressao .)
+    OR              shift and go to state 103
+
+
+state 154
+
+    (52) comando_if -> IF expressao THEN comando ELSE . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comando                        shift and go to state 162
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 155
+
+    (65) expressao2 -> ID [ expressao ] .
+    (89) fator -> ID [ expressao ] .
+
+  ! reduce/reduce conflict for AND resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for THEN resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for OR resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for DO resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for ] resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for ; resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for END resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for ID resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for IF resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for FOR resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for WHILE resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for BEGIN resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for WRITELN resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for READLN resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for ELSE resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for , resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for ) resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for TO resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+  ! reduce/reduce conflict for DOWNTO resolved using rule 65 (expressao2 -> ID [ expressao ] .)
+    AND             reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    THEN            reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    OR              reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    DO              reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    ]               reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    ;               reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    END             reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    ID              reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    IF              reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    FOR             reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    WHILE           reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    BEGIN           reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    WRITELN         reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    READLN          reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    ELSE            reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    ,               reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    )               reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    TO              reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    DOWNTO          reduce using rule 65 (expressao2 -> ID [ expressao ] .)
+    *               reduce using rule 89 (fator -> ID [ expressao ] .)
+    /               reduce using rule 89 (fator -> ID [ expressao ] .)
+    DIV             reduce using rule 89 (fator -> ID [ expressao ] .)
+    MOD             reduce using rule 89 (fator -> ID [ expressao ] .)
+    EQ              reduce using rule 89 (fator -> ID [ expressao ] .)
+    NEQ             reduce using rule 89 (fator -> ID [ expressao ] .)
+    LT              reduce using rule 89 (fator -> ID [ expressao ] .)
+    LE              reduce using rule 89 (fator -> ID [ expressao ] .)
+    GT              reduce using rule 89 (fator -> ID [ expressao ] .)
+    GE              reduce using rule 89 (fator -> ID [ expressao ] .)
+    +               reduce using rule 89 (fator -> ID [ expressao ] .)
+    -               reduce using rule 89 (fator -> ID [ expressao ] .)
+
+  ! AND             [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! THEN            [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! OR              [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! DO              [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! ]               [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! ;               [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! END             [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! ID              [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! IF              [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! FOR             [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! WHILE           [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! BEGIN           [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! WRITELN         [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! READLN          [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! ELSE            [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! ,               [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! )               [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! TO              [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+  ! DOWNTO          [ reduce using rule 89 (fator -> ID [ expressao ] .) ]
+
+
+state 156
+
+    (89) fator -> ID [ . expressao ]
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 163
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 157
+
+    (54) comando_for -> FOR ID ASSIGN expressao TO . expressao DO comando
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 164
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 158
+
+    (55) comando_for -> FOR ID ASSIGN expressao DOWNTO . expressao DO comando
+    (61) expressao -> . expressao OR expressao1
+    (62) expressao -> . expressao1
+    (63) expressao1 -> . expressao1 AND expressao2
+    (64) expressao1 -> . expressao2
+    (65) expressao2 -> . ID [ expressao ]
+    (66) expressao2 -> . expressao3 relop expressao3
+    (67) expressao2 -> . expressao3
+    (74) expressao3 -> . expressao3 addop termo
+    (75) expressao3 -> . termo
+    (78) termo -> . termo mulop fator
+    (79) termo -> . fator
+    (84) fator -> . NUMBER
+    (85) fator -> . STRING
+    (86) fator -> . TRUE
+    (87) fator -> . FALSE
+    (88) fator -> . ID
+    (89) fator -> . ID [ expressao ]
+    (90) fator -> . ( expressao )
+    (91) fator -> . chamada_funcao
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 69
+    NUMBER          shift and go to state 73
+    STRING          shift and go to state 74
+    TRUE            shift and go to state 75
+    FALSE           shift and go to state 76
+    (               shift and go to state 77
+
+    expressao                      shift and go to state 165
+    expressao1                     shift and go to state 67
+    expressao2                     shift and go to state 68
+    expressao3                     shift and go to state 70
+    termo                          shift and go to state 71
+    fator                          shift and go to state 72
+    chamada_funcao                 shift and go to state 78
+
+state 159
+
+    (23) tipo -> ARRAY [ NUMBER DOTDOT . NUMBER ] OF TIPOVAR
+
+    NUMBER          shift and go to state 166
+
+
+state 160
+
+    (35) procedimento -> PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt . bloco_simples ;
+    (7) bloco_simples -> . BEGIN comandos END
+    (8) bloco_simples -> . BEGIN declaracoes_variaveis comandos END
+
+    BEGIN           shift and go to state 18
+
+    bloco_simples                  shift and go to state 167
+
+state 161
+
+    (33) funcao_header -> FUNCTION ID ( parametros ) : TIPOVAR . ;
+
+    ;               shift and go to state 168
+
+
+state 162
+
+    (52) comando_if -> IF expressao THEN comando ELSE comando .
+
+    ;               reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    END             reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    ID              reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    IF              reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    FOR             reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    WHILE           reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    BEGIN           reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    WRITELN         reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    READLN          reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+    ELSE            reduce using rule 52 (comando_if -> IF expressao THEN comando ELSE comando .)
+
+
+state 163
+
+    (89) fator -> ID [ expressao . ]
+    (61) expressao -> expressao . OR expressao1
+
+    ]               shift and go to state 169
+    OR              shift and go to state 103
+
+
+state 164
+
+    (54) comando_for -> FOR ID ASSIGN expressao TO expressao . DO comando
+    (61) expressao -> expressao . OR expressao1
+
+    DO              shift and go to state 170
+    OR              shift and go to state 103
+
+
+state 165
+
+    (55) comando_for -> FOR ID ASSIGN expressao DOWNTO expressao . DO comando
+    (61) expressao -> expressao . OR expressao1
+
+    DO              shift and go to state 171
+    OR              shift and go to state 103
+
+
+state 166
+
+    (23) tipo -> ARRAY [ NUMBER DOTDOT NUMBER . ] OF TIPOVAR
+
+    ]               shift and go to state 172
+
+
+state 167
+
+    (35) procedimento -> PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples . ;
+
+    ;               shift and go to state 173
+
+
+state 168
+
+    (33) funcao_header -> FUNCTION ID ( parametros ) : TIPOVAR ; .
+
+    BEGIN           reduce using rule 33 (funcao_header -> FUNCTION ID ( parametros ) : TIPOVAR ; .)
+
+
+state 169
+
+    (89) fator -> ID [ expressao ] .
+
+    *               reduce using rule 89 (fator -> ID [ expressao ] .)
+    /               reduce using rule 89 (fator -> ID [ expressao ] .)
+    DIV             reduce using rule 89 (fator -> ID [ expressao ] .)
+    MOD             reduce using rule 89 (fator -> ID [ expressao ] .)
+    +               reduce using rule 89 (fator -> ID [ expressao ] .)
+    -               reduce using rule 89 (fator -> ID [ expressao ] .)
+    AND             reduce using rule 89 (fator -> ID [ expressao ] .)
+    THEN            reduce using rule 89 (fator -> ID [ expressao ] .)
+    OR              reduce using rule 89 (fator -> ID [ expressao ] .)
+    DO              reduce using rule 89 (fator -> ID [ expressao ] .)
+    ]               reduce using rule 89 (fator -> ID [ expressao ] .)
+    ;               reduce using rule 89 (fator -> ID [ expressao ] .)
+    END             reduce using rule 89 (fator -> ID [ expressao ] .)
+    ID              reduce using rule 89 (fator -> ID [ expressao ] .)
+    IF              reduce using rule 89 (fator -> ID [ expressao ] .)
+    FOR             reduce using rule 89 (fator -> ID [ expressao ] .)
+    WHILE           reduce using rule 89 (fator -> ID [ expressao ] .)
+    BEGIN           reduce using rule 89 (fator -> ID [ expressao ] .)
+    WRITELN         reduce using rule 89 (fator -> ID [ expressao ] .)
+    READLN          reduce using rule 89 (fator -> ID [ expressao ] .)
+    ELSE            reduce using rule 89 (fator -> ID [ expressao ] .)
+    ,               reduce using rule 89 (fator -> ID [ expressao ] .)
+    )               reduce using rule 89 (fator -> ID [ expressao ] .)
+    TO              reduce using rule 89 (fator -> ID [ expressao ] .)
+    DOWNTO          reduce using rule 89 (fator -> ID [ expressao ] .)
+    EQ              reduce using rule 89 (fator -> ID [ expressao ] .)
+    NEQ             reduce using rule 89 (fator -> ID [ expressao ] .)
+    LT              reduce using rule 89 (fator -> ID [ expressao ] .)
+    LE              reduce using rule 89 (fator -> ID [ expressao ] .)
+    GT              reduce using rule 89 (fator -> ID [ expressao ] .)
+    GE              reduce using rule 89 (fator -> ID [ expressao ] .)
+
+
+state 170
+
+    (54) comando_for -> FOR ID ASSIGN expressao TO expressao DO . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comando                        shift and go to state 174
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 171
+
+    (55) comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO . comando
+    (42) comando -> . atribuicao
+    (43) comando -> . comando_if
+    (44) comando -> . comando_for
+    (45) comando -> . comando_while
+    (46) comando -> . comando_composto
+    (47) comando -> . comando_write
+    (48) comando -> . comando_read
+    (49) comando -> . chamada_funcao
+    (36) atribuicao -> . ID ASSIGN expressao
+    (52) comando_if -> . IF expressao THEN comando ELSE comando
+    (53) comando_if -> . IF expressao THEN comando
+    (54) comando_for -> . FOR ID ASSIGN expressao TO expressao DO comando
+    (55) comando_for -> . FOR ID ASSIGN expressao DOWNTO expressao DO comando
+    (56) comando_while -> . WHILE expressao DO comando
+    (2) comando_composto -> . BEGIN comandos END
+    (50) comando_write -> . WRITELN ( lista_exp )
+    (51) comando_read -> . READLN ( lista_ids )
+    (92) chamada_funcao -> . ID ( argumentos )
+
+    ID              shift and go to state 46
+    IF              shift and go to state 47
+    FOR             shift and go to state 48
+    WHILE           shift and go to state 49
+    BEGIN           shift and go to state 33
+    WRITELN         shift and go to state 50
+    READLN          shift and go to state 51
+
+    comando                        shift and go to state 175
+    atribuicao                     shift and go to state 38
+    comando_if                     shift and go to state 39
+    comando_for                    shift and go to state 40
+    comando_while                  shift and go to state 41
+    comando_composto               shift and go to state 42
+    comando_write                  shift and go to state 43
+    comando_read                   shift and go to state 44
+    chamada_funcao                 shift and go to state 45
+
+state 172
+
+    (23) tipo -> ARRAY [ NUMBER DOTDOT NUMBER ] . OF TIPOVAR
+
+    OF              shift and go to state 176
+
+
+state 173
+
+    (35) procedimento -> PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ; .
+
+    PROCEDURE       reduce using rule 35 (procedimento -> PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ; .)
+    FUNCTION        reduce using rule 35 (procedimento -> PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ; .)
+    VAR             reduce using rule 35 (procedimento -> PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ; .)
+    BEGIN           reduce using rule 35 (procedimento -> PROCEDURE ID ( parametros ) ; declaracoes_variaveis_opt bloco_simples ; .)
+
+
+state 174
+
+    (54) comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .
+
+    ;               reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    END             reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    ID              reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    IF              reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    FOR             reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    WHILE           reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    BEGIN           reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    WRITELN         reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    READLN          reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+    ELSE            reduce using rule 54 (comando_for -> FOR ID ASSIGN expressao TO expressao DO comando .)
+
+
+state 175
+
+    (55) comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .
+
+    ;               reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    END             reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    ID              reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    IF              reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    FOR             reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    WHILE           reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    BEGIN           reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    WRITELN         reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    READLN          reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+    ELSE            reduce using rule 55 (comando_for -> FOR ID ASSIGN expressao DOWNTO expressao DO comando .)
+
+
+state 176
+
+    (23) tipo -> ARRAY [ NUMBER DOTDOT NUMBER ] OF . TIPOVAR
+
+    TIPOVAR         shift and go to state 177
+
+
+state 177
+
+    (23) tipo -> ARRAY [ NUMBER DOTDOT NUMBER ] OF TIPOVAR .
+
+    ;               reduce using rule 23 (tipo -> ARRAY [ NUMBER DOTDOT NUMBER ] OF TIPOVAR .)
+    )               reduce using rule 23 (tipo -> ARRAY [ NUMBER DOTDOT NUMBER ] OF TIPOVAR .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ID in state 23 resolved as shift
+WARNING: reduce/reduce conflict in state 7 resolved using rule (declaracoes -> declaracoes_subprogramas)
+WARNING: rejected rule (empty -> <empty>) in state 7
+WARNING: reduce/reduce conflict in state 19 resolved using rule (declaracoes -> declaracoes_variaveis declaracoes_subprogramas)
+WARNING: rejected rule (empty -> <empty>) in state 19
+WARNING: reduce/reduce conflict in state 155 resolved using rule (expressao2 -> ID [ expressao ])
+WARNING: rejected rule (fator -> ID [ expressao ]) in state 155
